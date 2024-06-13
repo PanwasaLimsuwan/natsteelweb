@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/natsteelweb/static/css/main.7400270b.css",
-    "main.js": "/natsteelweb/static/js/main.99f3cee1.js",
+    "main.js": "/natsteelweb/static/js/main.f029431c.js",
     "static/media/ลวดหนาม2.png": "/natsteelweb/static/media/ลวดหนาม2.4e172a84bfc31aa85be7.png",
     "static/media/ตาข่ายกรงไก่3.png": "/natsteelweb/static/media/ตาข่ายกรงไก่3.0a630cb73653d60d7b4b.png",
     "static/media/เหล็กวงบ่อ.png": "/natsteelweb/static/media/เหล็กวงบ่อ.9a9f12660dca45c3f6ac.png",
@@ -120,10 +120,10 @@
     "static/media/bac3.webp": "/natsteelweb/static/media/bac3.49f4e64670f55f8bca3f.webp",
     "index.html": "/natsteelweb/index.html",
     "main.7400270b.css.map": "/natsteelweb/static/css/main.7400270b.css.map",
-    "main.99f3cee1.js.map": "/natsteelweb/static/js/main.99f3cee1.js.map"
+    "main.f029431c.js.map": "/natsteelweb/static/js/main.f029431c.js.map"
   },
   "entrypoints": [
     "static/css/main.7400270b.css",
-    "static/js/main.99f3cee1.js"
+    "static/js/main.f029431c.js"
   ]
 }
