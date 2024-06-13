@@ -1,0 +1,10 @@
+@keyframes fly_to_cart {
+    from {
+        transform: translateX(0px);  /* ตำแหน่งเริ่มต้น */
+        opacity: 1;  /* มองเห็นได้เต็มที่ */
+    }
+    to {
+        transform: translateX(100px);  /* ตำแหน่งสิ้นสุด, เลื่อนไปทางขวา 100 พิกเซล */
+        opacity: 0;  /* โปร่งใสเต็มที่ */
+    }
+}

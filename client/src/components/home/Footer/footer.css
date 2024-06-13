@@ -1,0 +1,123 @@
+/* กำหนดรูปแบบทั่วไปให้กับคอลัมน์ */
+/* .footer-column {
+    display: flex;
+    flex-direction: column;
+    /* Media query สำหรับหน้าจอขนาดเล็กที่ต้องการให้ยังแสดงเป็น 2 คอลัมน์ */
+  /* @media (max-width: 768px) {
+    .max-w-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* ยังคงแบ่งหน้าจอเป็น 2 คอลัมน์ 
+      gap: 10px;
+    }
+  } */
+  
+  /* ตัวอย่างการตั้งค่าสำหรับหน้าจอขนาดใหญ่ 
+  @media (min-width: 769px) {
+    .max-w-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  }
+  
+  } */
+
+  .footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-bottom {
+      grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+    }
+  }
+
+  /* Add this CSS to your stylesheet or in a <style> tag */
+
+.footer-container {
+  background-color: #F5F5F3;
+  padding: 40px 20px;
+  font-family: 'Kanit', sans-serif;
+}
+
+.footer-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-section {
+  width: 100%;
+  max-width: 30%;
+  margin-bottom: 20px;
+}
+
+.footer-section h1 {
+  font-size: 1.5rem;
+  color: #154360;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #154360;
+  text-align: center;
+}
+
+.footer-section a {
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #ff9800;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.footer-section ul li {
+  display: flex;
+  align-items: center;
+  color: #154360;
+  margin-bottom: 10px;
+}
+
+.footer-section ul li span {
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.footer-section ul li:hover {
+  color: #ff9800;
+}
+
+.footer-bottom {
+  background-color: #F5F5F3;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.footer-bottom p {
+  color: #154360;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .footer-section {
+    text-align: left;
+  }
+}
+
+  
