@@ -6,7 +6,6 @@ import {
   Route,
   ScrollRestoration,
 } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
 import Header from "./components/home/Header/Header";
@@ -23,7 +22,6 @@ import Offer from "./pages/Offer/Offer";
 import Payment from "./pages/payment/Payment";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
-import Price from "./pages/price/Price";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import C1 from "./pages/Shop/C1";
@@ -33,17 +31,8 @@ import C4 from "./pages/Shop/C4";
 import C5 from "./pages/Shop/C5";
 import C6 from "./pages/Shop/C6";
 import Quotation from "./components/Quotation/Quotation";
-import { useEffect, useState } from "react";
-import Axios from "axios";
-import TestIcon from "./testIcon";
-// import SomeComponent from "./SomeComponent";
-// import SomeComponent from "./components/pageProps/productDetails/ProductInfo"
 
 const Layout = () => {
-  // const iconRef = useRef(null);
-  // const productName = "ตาข่ายกรงไก่ (3/4\" 24#)";
-  // const encodedProductName = encodeURIComponent(productName);
-  // const productPath = encodeURIComponent(productName);
   return (
     <div>
       <ToastContainer
@@ -71,12 +60,8 @@ const Layout = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      {/* <Link to={`/product/${encodedProductName}`}>View Product</Link> */}
       <Route path="/" element={<Layout />}>
-        {/* ==================== Header Navlink Start here =================== */}
         <Route index element={<Home />}></Route>
-        {/* <Route path="/price" element={<Price />}></Route> */}
-        <Route path="/TestIcon" element={<TestIcon />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/category1" element={<C1 />}></Route>
         <Route path="/category2" element={<C2 />}></Route>
@@ -88,13 +73,9 @@ const router = createBrowserRouter(
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/journal" element={<Journal />}></Route>
         <Route path="/quotation" element={<Quotation />}></Route>
-        {/* <Route path="/quotation" element={<SomeComponent />}></Route> */}
-        {/* ==================== Header Navlink End here ===================== */}
         <Route path="/category/:category" element={<Offer />}></Route>
-        {/* <Route path="/product/:_id" element={<ProductDetails />}></Route> */}
         <Route path="/product/:_id" element={<ProductDetails />}></Route>
         <Route path="/product/:productName" element={<ProductDetails />} />
-        {/* <Route path="/product/:productPath" element={<ProductDetails />} /> */}
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/paymentgateway" element={<Payment />}></Route>
       </Route>
@@ -105,17 +86,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await Axios.get("http://localhost:3001/");
-  //       console.log(res.data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
   return (
     <div className="font-bodyFont">
       <RouterProvider router={router} />

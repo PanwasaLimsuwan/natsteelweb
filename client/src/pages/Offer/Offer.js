@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SpecialOffers from "../../components/home/SpecialOffers/SpecialOffers";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { useParams } from "react-router-dom";
 import ShopSideNav from "../../components/pageProps/shopPage/ShopSideNav";
@@ -24,7 +23,6 @@ const Offer = () => {
           <ShopSideNav />
         </div>
         <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
-          <SpecialOffers />
         </div>
       </div>
       {/* ================= Products End here ===================== */}

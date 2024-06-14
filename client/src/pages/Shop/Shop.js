@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
-// import ShopCategory from "../../components/pageProps/shopPage/ShopCategory";
-// import ProductBanner from "../../components/pageProps/shopPage/ProductBanner";
 // import ShopSideNav from "../../components/pageProps/shopPage/ShopSideNav";
 import Category from "../../components/pageProps/shopPage/shopBy/Category";
 import AllProduct from "../../components/pageProps/shopPage/AllProduct";

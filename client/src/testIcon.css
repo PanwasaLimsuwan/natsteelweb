@@ -1,9 +1,0 @@
-.animated-icon {
-    transition: all 0.8s ease-out;
-  }
-  
-  .animated-icon.move {
-    opacity: 0;
-    transform: translateX(-100%) translateY(-100%);
-  }
-  

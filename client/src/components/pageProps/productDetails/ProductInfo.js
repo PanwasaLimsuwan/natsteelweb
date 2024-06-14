@@ -3,19 +3,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "../../designLayouts/Image";
 import { addToCart } from "../../../redux/orebiSlice";
-import emailjs from "emailjs-com";
 import { useRef } from "react";
-import { FaNewspaper } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import SpecialCase from "../../../components/SpecialCase/SpecialCase";
-import Product from "../../home/Products/Product";
 import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import "../../../assets/font.css";
-import Form from "../../Quotation/Form";
 
 export const flyToIcon = (imageSrc, startElement, iconRef) => {
   if (!iconRef.current) {
@@ -52,23 +44,6 @@ export const flyToIcon = (imageSrc, startElement, iconRef) => {
 };
 
 const ProductInfo = ({ productInfo }) => {
-  const highlightStyle = {
-    color: "#d0121a", // Change this to the desired color
-    fontWeight: "bold", // Change this to the desired font weight
-  };
-
-  console.log("Product Info:", productInfo);
-  const specialCaseRef = useRef(null);
-
-  // const [formData, setFormData] = useState({
-  //   productName: productInfo.productName,
-  //   Number: '',
-  //   Unit: '',
-  //   size: '',
-  //   guage: '',
-  //   delivery: '',
-  //   productType: '',
-  // });
 
   const navigate = useNavigate();
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -89,23 +64,7 @@ const ProductInfo = ({ productInfo }) => {
   const formRef = useRef(null);
   const iconRef = useRef(null);
 
-  // localStorage.setItem("Number", Number);
-  // localStorage.setItem("Unit", Unit);
-  // localStorage.setItem("size", size);
-  // localStorage.setItem("gauge", gauge);
-  // localStorage.setItem("delivery", delivery);
-  console.log("productInfo des: ", productInfo.des);
-  // console.log("size : ", formData.size);
-  // localStorage.setItem("ProductType", ProductType);
-  // console.log("ProductType : ", ProductInfo.ProductType);
-  localStorage.setItem("productName", productInfo.productName);
-  // localStorage.setItem("iconRef", JSON.stringify(iconRef.current));
-
-  const callSpecialFunction = () => {
-    if (specialCaseRef.current) {
-      specialCaseRef.current.exampleFunction();
-    }
-  };
+  // localStorage.setItem("productName", productInfo.productName);
 
   const handleNumber = (e) => {
     let value = parseInt(e.target.value, 10);
@@ -123,7 +82,6 @@ const ProductInfo = ({ productInfo }) => {
 
   const handlewireSize = (e) => {
     setwiresize(e.target.value);
-    // console.log("handleSize: ", formData);
   };
 
   const handlegauge = (e) => {
@@ -168,43 +126,13 @@ const ProductInfo = ({ productInfo }) => {
     setPopupOpen(false);
   };
 
-  // const handleNumber = (e) => {
-  //   let value = parseInt(e.target.value, 10);
-  //   if (value > 10000) {
-  //     value = 10000;
-  //   } else if (value < 1) {
-  //     value = 1;
-  //   }
-  //   setNumber(value);
-  // };
-
-  // const handleUnit = (e) => {
-  //   setUnit(e.target.value);
-  //   // setErrClientName("");
-  // };
-
   const handleProductType = (e) => {
     setProductType(e.target.value);
     console.log("handleProductType: ", e.target.value);
-    // setProductType(String(e.target.value));
   };
-
-  // const handleSubmit = (formData) => {
-  //   // e.preventDefault();
-  //   // Handle form submission
-  //   // console.log('Form Data from Form component:', formData);
-  //   onSubmit(formData);
-  // };
 
   const handlePost = (formData) => {
     console.log("Form Data:", formData);
-    // e.preventDefault();
-
-    // if (Number && NumberValidation(Number)) {
-    // SendEmail(e);
-    callSpecialFunction();
-    // setProductType(ProductType);
-    // dispatch(addToCart(formData));
     dispatch(
       addToCart({
         _id: productInfo._id,
@@ -221,13 +149,10 @@ const ProductInfo = ({ productInfo }) => {
         gauge,
         delivery,
         ProductType,
-        // iconRef: iconRef,
       })
     );
 
     setPopupOpen(false);
-    // handleNavigate();
-    // console.log("ProductType in the function: ", productInfo.des);
     if (imageRef.current) {
       // คุณสามารถใช้ imageRef.current ได้ที่นี่
       flyToIcon(productInfo.img, imageRef.current, iconRef);
@@ -235,18 +160,9 @@ const ProductInfo = ({ productInfo }) => {
     } else {
       console.error("Image ref is not available.");
     }
-    // flyToIcon(productInfo.img, iconRef.current, iconRef);
     setTimeout(() => {
       navigate("/quotation", {
         state: {
-          // productName: productInfo.productName,
-          // Number,
-          // Unit,
-          // size,
-          // gauge: productInfo.gauge,
-          // delivery,
-          // imgSrc: productInfo.img,
-          // ProductType,
           productName: productInfo.productName,
           Number: Number,
           Unit: Unit,
@@ -263,52 +179,40 @@ const ProductInfo = ({ productInfo }) => {
         },
       });
     }, 1000); // Delay should match the duration of your flyToIcon animation
-    // } else {
-    //   setPopupOpen(true);
-    //   alert("Please Enter a valid Number.");
-    // }
   };
 
-  const products = useSelector((state) => state.orebiReducer.products);
 
-  // const NumberValidation = (Number) => {
+  // const renderDescription = () => {
+  //   // Helper function to process each description
+  //   const processDescription = (description) => {
+  //     if (!description) return null; // Return null if no description is provided
+
+  //     return description.split(/:(.*?)-/).map((part, index) => (
+  //       <span key={index} style={index % 2 === 1 ? highlightStyle : {}}>
+  //         {part}
+  //       </span>
+  //     ));
+  //   };
+
+  //   // Process all descriptions, safely handling if any are undefined
+  //   const description = [];
+  //   if (productInfo.des) description.push(productInfo.des);
+  //   if (productInfo.des2) description.push(productInfo.des2);
+  //   if (productInfo.des3) description.push(productInfo.des3);
+  //   if (productInfo.des4) description.push(productInfo.des4);
+  //   // Render only existing descriptions
   //   return (
-  //     String(Number)
-  //       .match(/[1-9]/)
+  //     <>
+  //       {description.map((desc, index) => (
+  //         <React.Fragment key={index}>
+  //           {processDescription(desc)}
+  //           <br />
+  //           <br />
+  //         </React.Fragment>
+  //       ))}
+  //     </>
   //   );
   // };
-
-  const renderDescription = () => {
-    // Helper function to process each description
-    const processDescription = (description) => {
-      if (!description) return null; // Return null if no description is provided
-
-      return description.split(/:(.*?)-/).map((part, index) => (
-        <span key={index} style={index % 2 === 1 ? highlightStyle : {}}>
-          {part}
-        </span>
-      ));
-    };
-
-    // Process all descriptions, safely handling if any are undefined
-    const description = [];
-    if (productInfo.des) description.push(productInfo.des);
-    if (productInfo.des2) description.push(productInfo.des2);
-    if (productInfo.des3) description.push(productInfo.des3);
-    if (productInfo.des4) description.push(productInfo.des4);
-    // Render only existing descriptions
-    return (
-      <>
-        {description.map((desc, index) => (
-          <React.Fragment key={index}>
-            {processDescription(desc)}
-            <br />
-            <br />
-          </React.Fragment>
-        ))}
-      </>
-    );
-  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -322,14 +226,6 @@ const ProductInfo = ({ productInfo }) => {
         " {productInfo.description} "
       </p>
       <hr />
-      {/* <p className="ml-5 kanit-medium text-[#154360] text-lg">
-          ตัวอย่างงานที่ใช้
-        </p> */}
-      {/* <p className="ml-5 kanit-medium text-[#154360]">
-        "{productInfo.work1}" <br />
-        "{productInfo.work3}" <br />
-        "{productInfo.work2}"
-      </p> */}
       <span className="text-base ml-5 text-gray-600">
         {productInfo.des && (
           <p className="kanit-medium text-[#154360]">
@@ -382,14 +278,11 @@ const ProductInfo = ({ productInfo }) => {
 
             <span className="flex justify-center items-center h-full">
               <div ref={imageRef}>
-                {/* <button ref={imageRef}> */}
                 <Image
                   className="w-40 mb-10 mt-10 mr-48 self-center"
                   imgSrc={productInfo.img}
-                  // ref={imageRef}
                   onLoad={() => console.log("Image loaded:", imageRef.current)}
                 />
-                {/* </button> */}
               </div>
               <form ref={formRef}>
                 <input
@@ -409,20 +302,6 @@ const ProductInfo = ({ productInfo }) => {
                       onChange={handlewireSize}
                     >
                       <option value="">เลือก</option>
-                      {/* {productInfo.productName === "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
-                        <>
-                          {ProductType === '- ตา 1/2" (4 หุน)' || ProductType === '- ตา 3/4" (8 หุน)' ? (
-                            <>
-                              <option value="0.9x25m.">0.9x25m.</option>
-                              <option value="0.9x30m.">0.9x30m.</option>
-                            </>
-                          ) :  ProductType === '- ตา 1" (1 นิ้ว)' ? (
-                            <>
-                              <option value="1.2x30m.">1.2x30m.</option>
-                              </>
-                          ) : null}
-                          </>
-                      ) : productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? ( */}
                       {productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? (
                         <>
                           {ProductType === "- แบบ 2 เส้น" ? (
@@ -559,16 +438,8 @@ const ProductInfo = ({ productInfo }) => {
                   <p className="kanit-medium text-[#154360]">
                     ความยาว :
                     <input
-                      // color="#ff9800"
                       name="customsize"
-                      // type="Number"
-                      // type="from-control"
-                      // min={1}
-                      // max={10000}
-                      // maxLength={10000}
-                      // step={1}
                       value={customsize}
-                      // autoComplete="1"
                       onChange={handlecustomsize}
                       placeholder=""
                       className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
@@ -715,16 +586,8 @@ const ProductInfo = ({ productInfo }) => {
                       <p className="kanit-medium text-[#154360]">
                         ขนาด(ตรม.) :
                         <input
-                          // color="#ff9800"
                           name="customsize"
-                          // type="Number"
-                          // type="from-control"
-                          // min={1}
-                          // max={10000}
-                          // maxLength={10000}
-                          // step={1}
                           value={customsize}
-                          // autoComplete="1"
                           onChange={handlecustomsize}
                           placeholder="กว้างxยาว m."
                           className="text-[#ff9800] w-28 ml-9 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
@@ -733,37 +596,15 @@ const ProductInfo = ({ productInfo }) => {
                     )}
                   </p>
                 ) : null}
-                {/* <p className="kanit-medium text-[#154360]">
-                  ระบุขนาดเอง :
-                  <input
-                    // color="#ff9800"
-                    name="customsize"
-                    // type="Number"
-                    // type="from-control"
-                    // min={1}
-                    // max={10000}
-                    // maxLength={10000}
-                    // step={1}
-                    value={customsize}
-                    // autoComplete="1"
-                    onChange={handlecustomsize}
-                    placeholder=""
-                    className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                  ></input>
-                </p> */}
                 <p className="kanit-medium text-[#154360]">
                   จำนวน :
                   <input
-                    // color="#ff9800"
                     name="Number"
                     type="Number"
-                    // type="from-control"
                     min={1}
-                    // max={10000}
                     maxLength={10000}
                     step={1}
                     value={Number}
-                    // autoComplete="1"
                     onChange={handleNumber}
                     placeholder=""
                     className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
@@ -841,25 +682,8 @@ const ProductInfo = ({ productInfo }) => {
                     <option value="บริษัทจัดส่ง">บริษัทจัดส่ง</option>
                   </select>
                 </p>
-                {/* เพิ่มฟิลด์อื่น ๆ ตามความต้องการ */}
-                {/* <button type="submit">Order Product A</button> */}
               </form>
               <form ref={formRef}></form>
-              {/* )} */}
-              {/* <Form
-                // productInfo={formData}
-                productInfo={productInfo}
-                // handleNumber={handleNumber}
-                // handleUnit={handleUnit}
-                // handleProductType={handleProductType}
-                // setProductInfo={setFormData}
-                // handleSubmit={handleSubmit}
-                // onSubmit={() => handleSubmit(formData)}
-                // productInfo={productInfo}
-                formData={formData}
-                setFormData={setFormData}
-                // onSubmit={handlePost}
-              /> */}
             </span>
             <hr />
             <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
