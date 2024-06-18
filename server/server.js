@@ -372,6 +372,10 @@ app.post(
   })
 );
 
+app.use("/", (req,res) => {
+  res.send("Server is running!");
+});
+
 app.listen(3001, () => {
   console.log("Server running on port 3001");
 });

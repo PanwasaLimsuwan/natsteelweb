@@ -370,12 +370,12 @@ const Quotation = (item) => {
                   return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "กิ๊บลวดหนาม") {
                   return `สินค้า : ${item.name} ความยาว : ${item.clipsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "ปลอกเสา-ปลอกคาน") {
-                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "ปลอกสามเหลี่ยม") {
-                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "ปลอกสี่เหลี่ยม") {
-                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ขนาดปลอก : ${item.stirrupssize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาดปลอก : ${item.stirrupssize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาดปลอก : ${item.stirrupssize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "ตะปูตอกไม้") {
                   return `สินค้า : ${item.name} ขนาดตะปู : ${item.nailsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป") {
@@ -610,6 +610,7 @@ const Quotation = (item) => {
                     wiresize={item.wiresize}
                     barbedsize={item.barbedsize}
                     clipsize={item.clipsize}
+                    stirrupssize={item.stirrupssize}
                     gauge={item.guage}
                     coil={item.coil}
                     customsize={item.customsize}

@@ -99,7 +99,18 @@ const ItemCard = ({ item }) => {
               ขนาดลวด : {item.wiresize}
             </span>
           ) : null}
-          {item.name !== "กิ๊บลวดหนาม" &&
+          {item.name === "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" ||
+          item.name === "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" ||     
+          item.name === "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" ? (
+            <span className="kanit-medium text-[#154360] mb-1">
+              ขนาดปลอก : {item.stirrupssize}
+            </span>
+          ) : null}
+          {item.name !== "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
+          item.name !== "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" &&
+          item.name !== "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" &&     
+          item.name !== "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" &&
+          item.name !== "กิ๊บลวดหนาม" &&
           item.name !== "ตะปูตอกไม้" &&
           item.name !== "ลวดหนาม" ? (
             <span className="kanit-medium text-[#154360] mb-1">

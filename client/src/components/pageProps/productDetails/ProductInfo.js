@@ -128,7 +128,119 @@ const ProductInfo = ({ productInfo }) => {
     setProductType(e.target.value);
   };
 
-  const handlePost = (formData) => {
+  const handlePost = () => {
+    // {productInfo.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
+    //   productInfo.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
+    //     if (!wiresize || !gauge || !coil || !Number || !Unit || !delivery) {
+    //       if (coil === "ระบุขนาดเอง") {
+    //         if (!customsize) {
+    //           alert("กรุณากรอกข้อมูล");
+    //           return;
+    //         }
+    //       }
+    //     }
+    //   )
+    //  }
+    // if (
+    //   productInfo.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
+    //   productInfo.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)"
+    // ) {
+    //   if (!wiresize || !gauge || !coil || !Number || !Unit || !delivery) {
+    //     if (coil === "ระบุขนาดเอง") {
+    //       if (!customsize) {
+    //         alert("กรุณากรอกข้อมูล");
+    //         return;
+    //       }
+    //     } else { // เพิ่ม else สำหรับกรณี coil !== "ระบุขนาดเอง"
+    //       // ในกรณีที่ไม่ต้องการตรวจสอบ customsize สามารถทำอย่างอื่นได้ที่นี่
+    //     }
+    //   }
+    // }
+    if (
+      (productInfo.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
+        productInfo.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)") &&
+      (!wiresize ||
+        !gauge ||
+        !coil ||
+        (coil === "ระบุขนาดเอง" && !customsize) ||
+        !Number ||
+        !Unit ||
+        !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
+      (!wiresize || !coil || !ProductType || !Number || !Unit || !delivery)
+    ) {
+      if (!ProductType) {
+        alert("กรุณาเลือกประเภทสินค้า");
+        return;
+      }
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "ลวดหนาม" &&
+      (!wiresize ||
+        !barbedsize ||
+        (barbedsize === "ระบุเป็นความยาวที่ใช้" && !customsize) ||
+        !Number ||
+        !Unit ||
+        !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "กิ๊บลวดหนาม" &&
+      (!clipsize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" &&
+      (!wiresize ||
+        !stirrupssize ||
+        !ProductType ||
+        !Number ||
+        !Unit ||
+        !delivery)
+    ) {
+      if (!ProductType) {
+        alert("กรุณาเลือกประเภทสินค้า");
+        return;
+      }
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      (productInfo.productName === "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" ||
+        productInfo.productName === "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)") &&
+      (!wiresize || !stirrupssize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "ตะปูตอกไม้" &&
+      (!nailsize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" &&
+      (!wiresize || !gauge || !ProductType || !Number || !Unit || !delivery)
+    ) {
+      if (!ProductType) {
+        alert("กรุณาเลือกประเภทสินค้า");
+        return;
+      }
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "รั้วแรงดึง (ตาข่ายถักปม)" &&
+      (!wiresize || !gauge || !coil || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    }
     dispatch(
       addToCart({
         _id: productInfo._id,
@@ -140,6 +252,7 @@ const ProductInfo = ({ productInfo }) => {
         barbedsize,
         clipsize,
         nailsize,
+        stirrupssize,
         coil,
         customsize,
         gauge,
@@ -147,6 +260,7 @@ const ProductInfo = ({ productInfo }) => {
         ProductType,
       })
     );
+    alert("เพิ่มสินค้าสำเร็จ");
 
     setPopupOpen(false);
     if (imageRef.current) {
@@ -158,62 +272,26 @@ const ProductInfo = ({ productInfo }) => {
       navigate("/quotation", {
         state: {
           productName: productInfo.productName,
-          Number: Number,
-          Unit: Unit,
-          wiresize: wiresize,
-          gauge: gauge,
-          coil: coil,
-          barbedsize: barbedsize,
-          clipsize: clipsize,
-          nailsize: nailsize,
-          customsize: customsize,
-          delivery: delivery,
+          Number,
+          Unit,
+          wiresize,
+          gauge,
+          coil,
+          barbedsize,
+          clipsize,
+          nailsize,
+          stirrupssize,
+          customsize,
+          delivery,
           imgSrc: productInfo.img,
-          ProductType: ProductType,
+          ProductType,
         },
       });
     }, 1000); // Delay should match the duration of your flyToIcon animation
   };
 
-  // const renderDescription = () => {
-  //   // Helper function to process each description
-  //   const processDescription = (description) => {
-  //     if (!description) return null; // Return null if no description is provided
-
-  //     return description.split(/:(.*?)-/).map((part, index) => (
-  //       <span key={index} style={index % 2 === 1 ? highlightStyle : {}}>
-  //         {part}
-  //       </span>
-  //     ));
-  //   };
-
-  //   // Process all descriptions, safely handling if any are undefined
-  //   const description = [];
-  //   if (productInfo.des) description.push(productInfo.des);
-  //   if (productInfo.des2) description.push(productInfo.des2);
-  //   if (productInfo.des3) description.push(productInfo.des3);
-  //   if (productInfo.des4) description.push(productInfo.des4);
-  //   // Render only existing descriptions
-  //   return (
-  //     <>
-  //       {description.map((desc, index) => (
-  //         <React.Fragment key={index}>
-  //           {processDescription(desc)}
-  //           <br />
-  //           <br />
-  //         </React.Fragment>
-  //       ))}
-  //     </>
-  //   );
-  // };
-
   return (
     <div className="flex flex-col gap-5">
-      {/* <Link to="/shop">
-      <FaArrowLeft 
-        className="text-[#154360] text-3xl items-start cursor-pointer"
-      />
-      </Link> */}
       <h2
         className="ml-5 kanit-medium text-[#154360]"
         style={{ fontSize: "3rem" }}
@@ -350,16 +428,19 @@ const ProductInfo = ({ productInfo }) => {
                       </select>
                     </p>
                   ) : null}
-                  {productInfo.productName === "ปลอกเสา-ปลอกคาน" ||
-                  productInfo.productName === "ปลอกสามเหลี่ยม" ||
-                  productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
+                  {productInfo.productName ===
+                    "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" ||
+                  productInfo.productName ===
+                    "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" ||
+                  productInfo.productName ===
+                    "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" ? (
                     <p className="kanit-medium text-[#154360]">
                       ขนาดปลอก :
                       <input
                         name="text"
                         value={stirrupssize}
                         placeholder="10cmx10cm"
-                        className="text-[#ff9800] w-24 ml-2 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        className="text-[#ff9800] w-24 md:ml-2 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                         onChange={handlestirrupssize}
                       ></input>
                     </p>
@@ -372,7 +453,7 @@ const ProductInfo = ({ productInfo }) => {
                         type=""
                         value={nailsize}
                         placeholder="เลือก"
-                        className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        className="text-[#ff9800] w-24 md:ml-10 md:mt-5 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                         onChange={handlenailsize}
                       >
                         <option value="">เลือก</option>
@@ -402,7 +483,7 @@ const ProductInfo = ({ productInfo }) => {
                         type=""
                         value={clipsize}
                         placeholder="เลือก"
-                        className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        className="text-[#ff9800] w-24 md:ml-10 md:mt-5 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                         onChange={handleclipsize}
                       >
                         <option value="">เลือก</option>
@@ -420,7 +501,7 @@ const ProductInfo = ({ productInfo }) => {
                         type=""
                         value={barbedsize}
                         placeholder="เลือก"
-                        className="text-[#ff9800] w-24 ml-10 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        className="text-[#ff9800] w-24 md:ml-10 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                         onChange={handlebarbedsize}
                       >
                         <option value="">เลือก</option>
@@ -446,14 +527,17 @@ const ProductInfo = ({ productInfo }) => {
                         value={customsize}
                         onChange={handlecustomsize}
                         placeholder=""
-                        className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        className="text-[#ff9800] w-24 md:ml-4 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                       ></input>
                     </p>
                   )}
                   {productInfo.productName !== "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
-                  productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
-                  productInfo.productName !== "ปลอกสามเหลี่ยม" &&
-                  productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
+                  productInfo.productName !==
+                    "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" &&
+                  productInfo.productName !==
+                    "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" &&
+                  productInfo.productName !==
+                    "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" &&
                   productInfo.productName !== "ตะปูตอกไม้" &&
                   productInfo.productName !== "ลวดหนาม" &&
                   productInfo.productName !== "กิ๊บลวดหนาม" ? (
@@ -522,9 +606,12 @@ const ProductInfo = ({ productInfo }) => {
                       </select>
                     </p>
                   ) : null}
-                  {productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
-                  productInfo.productName !== "ปลอกสามเหลี่ยม" &&
-                  productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
+                  {productInfo.productName !==
+                    "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" &&
+                  productInfo.productName !==
+                    "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" &&
+                  productInfo.productName !==
+                    "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" &&
                   productInfo.productName !== "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" &&
                   productInfo.productName !== "ตะปูตอกไม้" &&
                   productInfo.productName !== "ลวดหนาม" &&
@@ -637,9 +724,12 @@ const ProductInfo = ({ productInfo }) => {
                         <>
                           <option value="ลัง">ลัง (18kg/ลัง)</option>
                         </>
-                      ) : productInfo.productName === "ปลอกเสา-ปลอกคาน" ||
-                        productInfo.productName === "ปลอกสามเหลี่ยม" ||
-                        productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
+                      ) : productInfo.productName ===
+                          "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" ||
+                        productInfo.productName ===
+                          "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)" ||
+                        productInfo.productName ===
+                          "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)" ? (
                         <>
                           <option value="ตัว">ตัว</option>
                           <option value="มัด">มัด (50ตัว/มัด)</option>
@@ -677,7 +767,6 @@ const ProductInfo = ({ productInfo }) => {
                       )}
                     </select>
                   </p>
-
                   <p className="kanit-medium sm:text-[13px] md:text-[15px] text-[#154360]">
                     จัดส่ง :
                     <select
