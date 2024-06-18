@@ -66,4 +66,9 @@
     cursor: pointer;
   }  
   
-  
+  /* Desktop Styles: Adjustments for Larger Screens */
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+  }
+}

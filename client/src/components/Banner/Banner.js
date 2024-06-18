@@ -19,6 +19,7 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
         justifyContent: "center",
         alignItems: "center",
         cursor: "grab",
+        height: "100vh", // สูงเต็มหน้าจอในทุกกรณี
       }}
     >
       <div
@@ -28,15 +29,17 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
+          width: "80%", // ให้เนื้อหาอยู่กึ่งกลาง
+          maxWidth: "700px", // ขนาดเนื้อหาสูงสุด
         }}
       >
         <h1
           className={`signika-bold ${animationClass.h1}`}
           style={{
             color: "#ff9800",
-            // fontWeight: "700",
-            fontSize: "7rem",
+            fontSize: "5rem", // ขนาดเพิ่มลงเล็กน้อยสำหรับมือถือ
             letterSpacing: "0.015em", // เพิ่มระยะห่างระหว่างตัวอักษรที่นี่
+            textAlign: "center", // การจัดข้อความ
           }}
         >
           NAT STEEL
@@ -47,7 +50,8 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
             color: "white",
             fontWeight: "550",
             fontSize: "1.5rem",
-            whiteSpace: "nowrap",
+            whiteSpace: "normal", // เปลี่ยนเป็น normal เพื่อให้ข้อความขึ้นแบบเต็มประโยค
+            margin: "15px 0", // ปรับขอบข้อความ
           }}
         >
           {text}
@@ -59,7 +63,7 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
             fontWeight: "900",
             fontSize: "1.25rem",
             marginTop: "10px",
-            whiteSpace: "nowrap",
+            whiteSpace: "normal", // เปลี่ยนเป็น normal เพื่อให้ข้อความขึ้นแบบเต็มประโยค
           }}
         >
           {Subtext}
@@ -68,8 +72,8 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
           style={{
             display: "flex",
             alignItems: "center",
-            // marginTop: "50px",
             justifyContent: "center",
+            marginTop: "20px", // ระยะห่างของเนื้อหา
           }}
         >
           <span style={{ display: "flex", alignItems: "center" }}>
@@ -84,8 +88,8 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
                 fontWeight: "400",
                 fontSize: "1rem",
                 textAlign: "center",
-                whiteSpace: "nowrap",
-                // margin: "0",
+                whiteSpace: "normal", // เปลี่ยนเป็น normal เพื่อให้ข้อความขึ้นแบบเต็มประโยค
+                margin: "0 10px", // ปรับขอบข้อความ
               }}
             >
               WELCOME TO CONSULT AND ORDER
@@ -104,6 +108,7 @@ const CustomSlide = ({ Subtext, imgSrc, text, animationClass }) => {
   );
 };
 
+
 const textAnimationClass = [
   { h1: "slideInFromLeft", p: "slideInFromRight", welcome: "floatAnimation" },
 ];
@@ -113,7 +118,7 @@ const Banner = () => {
   const [slides] = useState([
     {
       imgSrc: B1,
-      text: "ผู้ผลิตและจำหน่ายสินค้าเหล็กเกรดดีมีคุณภาพหลากหลายประเภท",
+      text: "ผู้ผลิตและจำหน่ายสินค้าเหล็กเกรดดีและมีคุณภาพหลากหลายประเภท",
     },
     {
       imgSrc: B2,
@@ -148,84 +153,26 @@ const Banner = () => {
   };
 
   return (
-    // <div className="w-full bg-white">
-    <div>
-      {/* <Slider {...settings}>
+    <div style={{ overflow: "hidden" }}>
+      <Slider {...settings}>
         {slides.map((slide, index) => (
           <TransitionGroup key={index}>
-            <CSSTransition classNames="fade" timeout={5000}>
+            <CSSTransition
+              key={index}
+              classNames="fade"
+              timeout={5000}
+              in={index === currentSlide} // เพิ่ม prop in เพื่อตรวจสอบว่า slide ปัจจุบันมีค่าเท่ากับ index หรือไม่
+            >
               <CustomSlide
-                key={index}
                 {...slide}
-                animationClass={textAnimationClass[0]}
+                animationClass={
+                  index === currentSlide ? textAnimationClass[0] : {}
+                }
               />
             </CSSTransition>
           </TransitionGroup>
         ))}
-      </Slider> */}
-      
-      {/* <Slider {...settings}>
-        <TransitionGroup>
-          <CSSTransition key={currentSlide} classNames="fade" timeout={5000}>
-            <CustomSlide
-              key={currentSlide}
-              {...slides[currentSlide]}
-              animationClass={textAnimationClass[0]}
-            />
-          </CSSTransition>
-        </TransitionGroup>
-      </Slider> */}
-
-      {/* <Slider {...settings}>
-      {slides.map((slide, index) => (
-        <TransitionGroup key={index}>
-          <CSSTransition classNames="fade" timeout={5000}>
-            <CustomSlide
-              key={index}
-              {...slide}
-              animationClass={textAnimationClass[0]}
-            />
-          </CSSTransition>
-        </TransitionGroup>
-      ))}
-    </Slider> */}
-
-    {/* <Slider {...settings}>
-  {slides.map((slide, index) => (
-    <TransitionGroup key={index}>
-      <CSSTransition 
-        key={index} 
-        classNames="fade" 
-        timeout={5000}
-        in={index === currentSlide} // เพิ่ม prop in เพื่อตรวจสอบว่า slide ปัจจุบันมีค่าเท่ากับ index หรือไม่
-      >
-        <CustomSlide
-          key={index}
-          {...slide}
-          animationClass={textAnimationClass[0]}
-        />
-      </CSSTransition>
-    </TransitionGroup>
-  ))}
-</Slider> */}
-
-<Slider {...settings}>
-  {slides.map((slide, index) => (
-    <TransitionGroup key={index}>
-      <CSSTransition
-        key={index}
-        classNames="fade"
-        timeout={5000}
-        in={index === currentSlide} // เพิ่ม prop in เพื่อตรวจสอบว่า slide ปัจจุบันมีค่าเท่ากับ index หรือไม่
-      >
-        <CustomSlide
-          {...slide}
-          animationClass={index === currentSlide ? textAnimationClass[0] : {}}
-        />
-      </CSSTransition>
-    </TransitionGroup>
-  ))}
-</Slider>
+      </Slider>
     </div>
   );
 };

@@ -1,83 +1,81 @@
 .custom-banner {
-    width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
-    object-fit: cover; /* Ensures the image covers the container without distortion */
-    border: none; /* Remove border for full screen */
+  width: 100vw; /* ความกว้างเต็มหน้าจอ */
+  height: 100vh; /* ความสูงเต็มหน้าจอ */
+  object-fit: cover; /* ให้รูปภาพกระจายเต็มพื้นที่ */
+  border: none; /* ลบเส้นขอบ */
 }
 
 .custom-slide {
-    width: 100vw;
-    height: 100vh;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: both;
-    overflow: hidden; /* เพิ่ม overflow: hidden เพื่อป้องกันการเกิดพื้นที่สีขาวด้านล่าง */
-    margin-bottom: -5px; /* ลด margin-bottom เพื่อลบพื้นที่สีขาวด้านล่าง */
+  width: 100vw; /* ความกว้างเต็มหน้าจอ */
+  height: 100vh; /* ความสูงเต็มหน้าจอ */
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  overflow: hidden; /* ให้ซ่อนส่วนที่เกินขอบ */
 }
 
 .fade-enter {
-    opacity: 0;
-    transform: scale(0.95);
+  opacity: 0;
+  transform: scale(0.95);
 }
 .fade-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 300ms, transform 300ms;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
 }
 .fade-exit {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 .fade-exit-active {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 300ms, transform 300ms;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 300ms, transform 300ms;
 }
 
 /* Animation */
 @keyframes slideInFromLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
   }
-  
-  .slideInFromLeft {
-    animation: slideInFromLeft 1s ease-in-out;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
 
-  @keyframes slideInFromRight {
-    0% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  .slideInFromRight {
-    animation: slideInFromRight 1s ease-in-out;
-  }
+.slideInFromLeft {
+  animation: slideInFromLeft 1s ease-in-out;
+}
 
-  @keyframes floatAnimation {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slideInFromRight {
+  animation: slideInFromRight 1s ease-in-out;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .floatAnimation {
-    animation: floatAnimation 1s ease-in-out;
+  animation: floatAnimation 1s ease-in-out;
 }
-

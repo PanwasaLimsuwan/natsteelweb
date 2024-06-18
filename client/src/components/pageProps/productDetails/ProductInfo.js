@@ -11,7 +11,6 @@ import "../../../assets/font.css";
 
 export const flyToIcon = (imageSrc, startElement, iconRef) => {
   if (!iconRef.current) {
-    console.warn("Icon ref is not ready.");
     return;
   }
 
@@ -44,7 +43,6 @@ export const flyToIcon = (imageSrc, startElement, iconRef) => {
 };
 
 const ProductInfo = ({ productInfo }) => {
-
   const navigate = useNavigate();
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [Number, setNumber] = useState("");
@@ -106,7 +104,7 @@ const ProductInfo = ({ productInfo }) => {
 
   const handlestirrupssize = (e) => {
     setstirrupssize(e.target.value);
-  }
+  };
 
   const handlecustomsize = (e) => {
     setcustomsize(e.target.value);
@@ -128,11 +126,9 @@ const ProductInfo = ({ productInfo }) => {
 
   const handleProductType = (e) => {
     setProductType(e.target.value);
-    console.log("handleProductType: ", e.target.value);
   };
 
   const handlePost = (formData) => {
-    console.log("Form Data:", formData);
     dispatch(
       addToCart({
         _id: productInfo._id,
@@ -157,8 +153,6 @@ const ProductInfo = ({ productInfo }) => {
       // คุณสามารถใช้ imageRef.current ได้ที่นี่
       flyToIcon(productInfo.img, imageRef.current, iconRef);
       // ตรวจสอบ console.log เพื่อตรวจสอบว่า imageRef.current ไม่ใช่ null
-    } else {
-      console.error("Image ref is not available.");
     }
     setTimeout(() => {
       navigate("/quotation", {
@@ -180,7 +174,6 @@ const ProductInfo = ({ productInfo }) => {
       });
     }, 1000); // Delay should match the duration of your flyToIcon animation
   };
-
 
   // const renderDescription = () => {
   //   // Helper function to process each description
@@ -216,13 +209,21 @@ const ProductInfo = ({ productInfo }) => {
 
   return (
     <div className="flex flex-col gap-5">
+      {/* <Link to="/shop">
+      <FaArrowLeft 
+        className="text-[#154360] text-3xl items-start cursor-pointer"
+      />
+      </Link> */}
       <h2
         className="ml-5 kanit-medium text-[#154360]"
         style={{ fontSize: "3rem" }}
       >
         {productInfo.productName}
       </h2>
-      <p className="ml-5 w-[800px] kanit-medium text-[#154360]">
+      <p
+        className="ml-5 kanit-medium text-[#154360]"
+        style={{ maxWidth: "800px" }}
+      >
         " {productInfo.description} "
       </p>
       <hr />
@@ -261,8 +262,8 @@ const ProductInfo = ({ productInfo }) => {
         ขอใบเสนอราคา
       </button>
       {isPopupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-10 rounded-lg max-w-4xl w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center mt-10">
+          <div className="bg-white p-10 rounded-lg max-w-4xl w-3/4 h-auto md:w-full md:h-auto">
             <div className="flex justify-end">
               <button
                 className="text-black font-bold"
@@ -271,17 +272,15 @@ const ProductInfo = ({ productInfo }) => {
                 <ImCross className="hover:text-[#E74C3C]" />
               </button>
             </div>
-            <p className="text-2xl kanit-medium text-[#154360] text-center mb-5">
+            <p className="md:text-2xl text-md kanit-medium text-[#154360] text-center mb-5">
               {productInfo.productName}
             </p>
             <hr />
-
             <span className="flex justify-center items-center h-full">
               <div ref={imageRef}>
                 <Image
-                  className="w-40 mb-10 mt-10 mr-48 self-center"
+                  className="w-40 mb-0 md:mb-10 md:mt-10 mr-48 self-center"
                   imgSrc={productInfo.img}
-                  onLoad={() => console.log("Image loaded:", imageRef.current)}
                 />
               </div>
               <form ref={formRef}>
@@ -290,400 +289,412 @@ const ProductInfo = ({ productInfo }) => {
                   name="productName"
                   value={productInfo.productName}
                 />
-                {productInfo.productName !== "กิ๊บลวดหนาม" && productInfo.productName !== "ตะปูตอกไม้" ? (
+                <div className="sm:text-[13px] md:text-[16px]">
+                  {productInfo.productName !== "กิ๊บลวดหนาม" &&
+                  productInfo.productName !== "ตะปูตอกไม้" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ขนาดลวด :
+                      <select
+                        name="text"
+                        type=""
+                        value={wiresize}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-24 md:mt-5 mb-2 md:ml-5 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlewireSize}
+                      >
+                        <option value="">เลือก</option>
+                        {productInfo.productName ===
+                        "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? (
+                          <>
+                            {ProductType === "- แบบ 2 เส้น" ? (
+                              <>
+                                <option value="3.0mm.">3.0mm.</option>
+                                <option value="3.0mm.">3.0mm.</option>
+                                <option value="3.2mm.">3.2mm.</option>
+                                <option value="3.2mm.">3.2mm.</option>
+                                <option value="4.0mm.">4.0mm.</option>
+                                <option value="4.0mm.">4.0mm.</option>
+                                <option value="6.0mm.">6.0mm.</option>
+                              </>
+                            ) : ProductType === "- แบบ 3 เส้น" ? (
+                              <>
+                                <option value="4.0mm.">4.0mm.</option>
+                              </>
+                            ) : null}
+                          </>
+                        ) : productInfo.productName ===
+                          "รั้วแรงดึง (ตาข่ายถักปม)" ? (
+                          <>
+                            <option value="2.0 มิล">2.0 มิล</option>
+                            <option value="2.5 มิล">2.5 มิล</option>
+                          </>
+                        ) : productInfo.productName === "ลวดหนาม" ? (
+                          <>
+                            <option value="#10 (3.2มิล)">#10 (3.2มิล)</option>
+                            <option value="#11 (2.9มิล)">#11 (2.9มิล)</option>
+                            <option value="#12 (2.5มิล)">#12 (2.5มิล)</option>
+                            <option value="#13 (2.35มิล)">#13 (2.35มิล)</option>
+                            <option value="#14 (2.0มิล)">#14 (2.0มิล)</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value="#8 (4มิล)">#8 (4มิล)</option>
+                            <option value="#9 (3.6มิล)">#9 (3.6มิล)</option>
+                            <option value="#10 (3.2มิล)">#10 (3.2มิล)</option>
+                            <option value="#11 (2.9มิล)">#11 (2.9มิล)</option>
+                            <option value="#12 (2.5มิล)">#12 (2.5มิล)</option>
+                            <option value="#13 (2.35มิล)">#13 (2.35มิล)</option>
+                            <option value="#14 (2.0มิล)">#14 (2.0มิล)</option>
+                          </>
+                        )}
+                      </select>
+                    </p>
+                  ) : null}
+                  {productInfo.productName === "ปลอกเสา-ปลอกคาน" ||
+                  productInfo.productName === "ปลอกสามเหลี่ยม" ||
+                  productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ขนาดปลอก :
+                      <input
+                        name="text"
+                        value={stirrupssize}
+                        placeholder="10cmx10cm"
+                        className="text-[#ff9800] w-24 ml-2 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlestirrupssize}
+                      ></input>
+                    </p>
+                  ) : null}
+                  {productInfo.productName === "ตะปูตอกไม้" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ขนาดตะปู :
+                      <select
+                        name="text"
+                        type=""
+                        value={nailsize}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlenailsize}
+                      >
+                        <option value="">เลือก</option>
+                        <option value='6"x4'>6"x4</option>
+                        <option value='5"x5'>5"x5</option>
+                        <option value='4"x7'>4"7</option>
+                        <option value='3"x8'>3"x8</option>
+                        <option value='3 1/2"x8'>3 1/2"x8</option>
+                        <option value='3"x10'>3"x10</option>
+                        <option value='2 1/2"x10'>2 1/2"x10</option>
+                        <option value='2"x11'>2"x11</option>
+                        <option value='2 1/2"x12'>2 1/2"x12</option>
+                        <option value='2"x13'>2"x13</option>
+                        <option value='1 1/2"x13'>1 1/2"x13</option>
+                        <option value='1 3/4"x14'>1 3/4"x14</option>
+                        <option value='1 1/2"x14'>1 1/2"x14</option>
+                        <option value='1"x17'>1"x17</option>
+                        <option value='1 1/14"x16'>1 1/14"x16</option>
+                      </select>
+                    </p>
+                  ) : null}
+                  {productInfo.productName === "กิ๊บลวดหนาม" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ความยาว :
+                      <select
+                        name="text"
+                        type=""
+                        value={clipsize}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handleclipsize}
+                      >
+                        <option value="">เลือก</option>
+                        <option value="4 นิ้ว">4 นิ้ว</option>
+                        <option value="5 นิ้ว">5 นิ้ว</option>
+                        <option value="6 นิ้ว">6 นิ้ว</option>
+                      </select>
+                    </p>
+                  ) : null}
+                  {productInfo.productName === "ลวดหนาม" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      น้ำหนัก(กิโลกรัม/ขด) :
+                      <select
+                        name="text"
+                        type=""
+                        value={barbedsize}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-24 ml-10 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlebarbedsize}
+                      >
+                        <option value="">เลือก</option>
+                        <option value="3 กิโลกรัม/ขด">3 กิโลกรัม/ขด</option>
+                        <option value="4 กิโลกรัม/ขด">4 กิโลกรัม/ขด</option>
+                        <option value="5 กิโลกรัม/ขด">5 กิโลกรัม/ขด</option>
+                        <option value="6 กิโลกรัม/ขด">6 กิโลกรัม/ขด</option>
+                        <option value="7 กิโลกรัม/ขด">7 กิโลกรัม/ขด</option>
+                        <option value="8 กิโลกรัม/ขด">8 กิโลกรัม/ขด</option>
+                        <option value="9 กิโลกรัม/ขด">9 กิโลกรัม/ขด</option>
+                        <option value="10 กิโลกรัม/ขด">10 กิโลกรัม/ขด</option>
+                        <option value="ระบุเป็นความยาวที่ใช้">
+                          ระบุเป็นความยาวที่ใช้
+                        </option>
+                      </select>
+                    </p>
+                  ) : null}
+                  {barbedsize === "ระบุเป็นความยาวที่ใช้" && (
+                    <p className="kanit-medium text-[#154360]">
+                      ความยาว :
+                      <input
+                        name="customsize"
+                        value={customsize}
+                        onChange={handlecustomsize}
+                        placeholder=""
+                        className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                      ></input>
+                    </p>
+                  )}
+                  {productInfo.productName !== "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
+                  productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
+                  productInfo.productName !== "ปลอกสามเหลี่ยม" &&
+                  productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
+                  productInfo.productName !== "ตะปูตอกไม้" &&
+                  productInfo.productName !== "ลวดหนาม" &&
+                  productInfo.productName !== "กิ๊บลวดหนาม" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ตา :
+                      <select
+                        name="text"
+                        type=""
+                        value={gauge}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-24 md:ml-16 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlegauge}
+                      >
+                        <option value="">เลือก</option>
+                        {productInfo.productName ===
+                        "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? (
+                          <>
+                            {ProductType === "- แบบ 2 เส้น" ? (
+                              <>
+                                <option value="30m.">30m.</option>
+                                <option value="50m.">40m.</option>
+                                <option value="30m.">30m.</option>
+                                <option value="50m.">40m.</option>
+                                <option value="30m.">30m.</option>
+                                <option value="50m.">40m.</option>
+                                <option value="25m.">25m.</option>
+                              </>
+                            ) : ProductType === "- แบบ 3 เส้น" ? (
+                              <>
+                                <option value="25m.">25m.</option>
+                              </>
+                            ) : null}
+                          </>
+                        ) : productInfo.productName ===
+                          "รั้วแรงดึง (ตาข่ายถักปม)" ? (
+                          <>
+                            <option value="10x10 cm เท่ากัน">
+                              10x10 cm เท่ากัน
+                            </option>
+                            <option value="15 cm ไม่เท่ากัน (ถี่ล่าง ห่างบน)">
+                              15 cm ไม่เท่ากัน (ถี่ล่าง ห่างบน)
+                            </option>
+                          </>
+                        ) : productInfo.productName ===
+                          "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
+                          <>
+                            <option value='3/4" เต็ม'>3/4" เต็ม</option>
+                            <option value='1" เต็ม'>1" เต็ม</option>
+                            <option value='1-1/2" เต็ม'>1-1/2" เต็ม</option>
+                            <option value='2" เต็ม'>2" เต็ม</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value='1" เต็ม'>1" เต็ม</option>
+                            <option value='1" ทั่วไป'>1" ทั่วไป</option>
+                            <option value='1-1/2" เต็ม'>1-1/2" เต็ม</option>
+                            <option value='1-1/2" ทั่วไป'>1-1/2" ทั่วไป</option>
+                            <option value='2" เต็ม'>2" เต็ม</option>
+                            <option value='2" ทั่วไป'>2" ทั่วไป</option>
+                            <option value='2-1/2" เต็ม'>2-1/2" เต็ม</option>
+                            <option value='2-1/2" ทั่วไป'>2-1/2" ทั่วไป</option>
+                            <option value='3" เต็ม'>3" เต็ม</option>
+                            <option value='3" ทั่วไป'>3" ทั่วไป</option>
+                          </>
+                        )}
+                      </select>
+                    </p>
+                  ) : null}
+                  {productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
+                  productInfo.productName !== "ปลอกสามเหลี่ยม" &&
+                  productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
+                  productInfo.productName !== "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" &&
+                  productInfo.productName !== "ตะปูตอกไม้" &&
+                  productInfo.productName !== "ลวดหนาม" &&
+                  productInfo.productName !== "กิ๊บลวดหนาม" ? (
+                    <p className="kanit-medium text-[#154360]">
+                      ขนาด(ต่อม้วน) :
+                      <select
+                        name="text"
+                        type=""
+                        value={coil}
+                        placeholder="เลือก"
+                        className="text-[#ff9800] w-28 md:ml-5 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                        onChange={handlecoil}
+                      >
+                        <option value="">เลือก</option>
+                        {productInfo.productName ===
+                        "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
+                          <>
+                            <option value="0.9x25 m.">0.9x25 m.</option>
+                            <option value="0.9x30 m.">0.9x30 m.</option>
+                            <option value="1.2x30 m.">1.2x30 m.</option>
+                          </>
+                        ) : productInfo.productName ===
+                          "รั้วแรงดึง (ตาข่ายถักปม)" ? (
+                          <>
+                            <option value="0.9x30 m.">0.9x30 m.</option>
+                            <option value="0.9x50 m.">0.9x50 m.</option>
+                            <option value="0.9x100 m.">0.9x100 m.</option>
+                            <option value="1.2x30 m.">1.2x30 m.</option>
+                            <option value="1.2x50 m.">1.2x50 m.</option>
+                            <option value="1.2x100 m.">1.2x100 m.</option>
+                            <option value="1.5x30 m.">1.5x30 m.</option>
+                            <option value="1.5x50 m.">1.5x50 m.</option>
+                            <option value="1.5x100 m.">1.5x100 m.</option>
+                            <option value="1.65x30 m.">1.65x30 m.</option>
+                            <option value="1.65x50 m.">1.65x50 m.</option>
+                            <option value="1.65x100 m.">1.65x100 m.</option>
+                            <option value="1.8x30 m.">1.8x30 m.</option>
+                            <option value="1.8x50 m.">1.8x50 m.</option>
+                            <option value="1.8x100 m.">1.8x100 m.</option>
+                            <option value="2.0x30 m.">2.0x30 m.</option>
+                            <option value="2.0x50 m.">2.0x50 m.</option>
+                            <option value="2.0x100 m.">2.0x100 m.</option>
+                          </>
+                        ) : productInfo.productName ===
+                          "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
+                          <>
+                            <option value="1x20 m.">1x20 m.</option>
+                            <option value="1.2x2.4 m.">1.2x2.4 m.</option>
+                            <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value="0.8x10 m.">0.8x10 m.</option>
+                            <option value="1.0x10 m.">1.0x10 m.</option>
+                            <option value="1.2x10 m.">1.2x10 m.</option>
+                            <option value="1.5x10 m.">1.5x10 m.</option>
+                            <option value="1.8x10 m.">1.8x10 m.</option>
+                            <option value="2.0x10 m.">2.0x10 m.</option>
+                            <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
+                          </>
+                        )}
+                      </select>
+                      {coil === "ระบุขนาดเอง" && (
+                        <p className="kanit-medium text-[#154360]">
+                          ขนาด(ตรม.) :
+                          <input
+                            name="customsize"
+                            value={customsize}
+                            onChange={handlecustomsize}
+                            placeholder="กว้างxยาว m."
+                            className="text-[#ff9800] w-28 ml-9 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                          ></input>
+                        </p>
+                      )}
+                    </p>
+                  ) : null}
                   <p className="kanit-medium text-[#154360]">
-                    ขนาดลวด :
+                    จำนวน :
+                    <input
+                      name="Number"
+                      type="Number"
+                      min={1}
+                      maxLength={10000}
+                      step={1}
+                      value={Number}
+                      onChange={handleNumber}
+                      placeholder=""
+                      className="text-[#ff9800] w-24 md:ml-4 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                    ></input>
+                  </p>
+                  <p className="kanit-medium text-[#154360]">
+                    หน่วย :
                     <select
-                      name="text"
-                      type=""
-                      value={wiresize}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-24 mt-5 ml-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handlewireSize}
+                      name="Unit"
+                      value={Unit}
+                      onChange={handleUnit}
+                      className="text-[#ff9800] w-24 md:ml-6 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                     >
                       <option value="">เลือก</option>
-                      {productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? (
+                      {productInfo.productName ===
+                        "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ||
+                      productInfo.productName ===
+                        "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
                         <>
-                          {ProductType === "- แบบ 2 เส้น" ? (
-                            <>
-                              <option value="3.0mm.">3.0mm.</option>
-                              <option value="3.0mm.">3.0mm.</option>
-                              <option value="3.2mm.">3.2mm.</option>
-                              <option value="3.2mm.">3.2mm.</option>
-                              <option value="4.0mm.">4.0mm.</option>
-                              <option value="4.0mm.">4.0mm.</option>
-                              <option value="6.0mm.">6.0mm.</option>
-                              </>
-                          ) : ( ProductType === "- แบบ 3 เส้น" ? (
-                            <>
-                              <option value="4.0mm.">4.0mm.</option>
-                              </>
-                              ) : null)}
-                            </>
-                      ) : productInfo.productName ===
-                      "รั้วแรงดึง (ตาข่ายถักปม)" ? (
+                          {/* <option value="ขด">ขด</option> */}
+                          <option value="ม้วน">ม้วน</option>
+                        </>
+                      ) : productInfo.productName === "ตะปูตอกไม้" ? (
                         <>
-                          <option value="2.0 มิล">2.0 มิล</option>
-                          <option value="2.5 มิล">2.5 มิล</option>
+                          <option value="ลัง">ลัง (18kg/ลัง)</option>
+                        </>
+                      ) : productInfo.productName === "ปลอกเสา-ปลอกคาน" ||
+                        productInfo.productName === "ปลอกสามเหลี่ยม" ||
+                        productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
+                        <>
+                          <option value="ตัว">ตัว</option>
+                          <option value="มัด">มัด (50ตัว/มัด)</option>
+                          <option value="กระสอบ">
+                            กระสอบ (25กิโลกรัม/กระสอบ)
+                          </option>
+                        </>
+                      ) : productInfo.productName === "กิ๊บลวดหนาม" ? (
+                        <>
+                          <option value="ตัว">ตัว</option>
+                          <option value="กระสอบ">
+                            กระสอบ (25กิโลกรัม/กระสอบ)
+                          </option>
                         </>
                       ) : productInfo.productName === "ลวดหนาม" ? (
                         <>
-                          <option value="#10 (3.2มิล)">#10 (3.2มิล)</option>
-                          <option value="#11 (2.9มิล)">#11 (2.9มิล)</option>
-                          <option value="#12 (2.5มิล)">#12 (2.5มิล)</option>
-                          <option value="#13 (2.35มิล)">#13 (2.35มิล)</option>
-                          <option value="#14 (2.0มิล)">#14 (2.0มิล)</option>
-                        </>
-                      ) : (
-                        <>
-                          <option value="#8 (4มิล)">#8 (4มิล)</option>
-                          <option value="#9 (3.6มิล)">#9 (3.6มิล)</option>
-                          <option value="#10 (3.2มิล)">#10 (3.2มิล)</option>
-                          <option value="#11 (2.9มิล)">#11 (2.9มิล)</option>
-                          <option value="#12 (2.5มิล)">#12 (2.5มิล)</option>
-                          <option value="#13 (2.35มิล)">#13 (2.35มิล)</option>
-                          <option value="#14 (2.0มิล)">#14 (2.0มิล)</option>
-                        </>
-                      )}
-                    </select>
-                  </p>
-                ) : null}
-                {productInfo.productName === "ปลอกเสา-ปลอกคาน" || productInfo.productName === "ปลอกสามเหลี่ยม" || productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
-                <p className="kanit-medium text-[#154360]">
-                  ขนาดปลอก : 
-                  <input
-                    name="text"
-                    value={stirrupssize}
-                    placeholder="10cmx10cm"
-                    className="text-[#ff9800] w-24 ml-2 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                    onChange={handlestirrupssize}
-                  ></input>
-                </p> 
-              ) : null}
-                {productInfo.productName === "ตะปูตอกไม้" ? (
-                  <p className="kanit-medium text-[#154360]">
-                    ขนาดตะปู :
-                    <select
-                      name="text"
-                      type=""
-                      value={nailsize}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handlenailsize}
-                    >
-                      <option value="">เลือก</option>
-                      <option value='6"x4'>6"x4</option>
-                      <option value='5"x5'>5"x5</option>
-                      <option value='4"x7'>4"7</option>
-                      <option value='3"x8'>3"x8</option>
-                      <option value='3 1/2"x8'>3 1/2"x8</option>
-                      <option value='3"x10'>3"x10</option>
-                      <option value='2 1/2"x10'>2 1/2"x10</option>
-                      <option value='2"x11'>2"x11</option>
-                      <option value='2 1/2"x12'>2 1/2"x12</option>
-                      <option value='2"x13'>2"x13</option>
-                      <option value='1 1/2"x13'>1 1/2"x13</option>
-                      <option value='1 3/4"x14'>1 3/4"x14</option>
-                      <option value='1 1/2"x14'>1 1/2"x14</option>
-                      <option value='1"x17'>1"x17</option>
-                      <option value='1 1/14"x16'>1 1/14"x16</option>
-                    </select>
-                  </p>
-                ) : null}
-                {productInfo.productName === "กิ๊บลวดหนาม" ? (
-                  <p className="kanit-medium text-[#154360]">
-                    ความยาว :
-                    <select
-                      name="text"
-                      type=""
-                      value={clipsize}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-24 ml-10 mt-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handleclipsize}
-                    >
-                      <option value="">เลือก</option>
-                      <option value="4 นิ้ว">4 นิ้ว</option>
-                      <option value="5 นิ้ว">5 นิ้ว</option>
-                      <option value="6 นิ้ว">6 นิ้ว</option>
-                    </select>
-                  </p>
-                ) : null}
-                {productInfo.productName === "ลวดหนาม" ? (
-                  <p className="kanit-medium text-[#154360]">
-                    น้ำหนัก(กิโลกรัม/ขด) :
-                    <select
-                      name="text"
-                      type=""
-                      value={barbedsize}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-24 ml-10 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handlebarbedsize}
-                    >
-                      <option value="">เลือก</option>
-                      <option value="3 กิโลกรัม/ขด">3 กิโลกรัม/ขด</option>
-                      <option value="4 กิโลกรัม/ขด">4 กิโลกรัม/ขด</option>
-                      <option value="5 กิโลกรัม/ขด">5 กิโลกรัม/ขด</option>
-                      <option value="6 กิโลกรัม/ขด">6 กิโลกรัม/ขด</option>
-                      <option value="7 กิโลกรัม/ขด">7 กิโลกรัม/ขด</option>
-                      <option value="8 กิโลกรัม/ขด">8 กิโลกรัม/ขด</option>
-                      <option value="9 กิโลกรัม/ขด">9 กิโลกรัม/ขด</option>
-                      <option value="10 กิโลกรัม/ขด">10 กิโลกรัม/ขด</option>
-                      <option value="ระบุเป็นความยาวที่ใช้">
-                        ระบุเป็นความยาวที่ใช้
-                      </option>
-                    </select>
-                  </p>
-                ) : null}
-                {barbedsize === "ระบุเป็นความยาวที่ใช้" && (
-                  <p className="kanit-medium text-[#154360]">
-                    ความยาว :
-                    <input
-                      name="customsize"
-                      value={customsize}
-                      onChange={handlecustomsize}
-                      placeholder=""
-                      className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                    ></input>
-                  </p>
-                )}
-                {productInfo.productName !== "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
-                productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
-                productInfo.productName !== "ปลอกสามเหลี่ยม" &&
-                productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
-                productInfo.productName !== "ตะปูตอกไม้" &&
-                productInfo.productName !== "ลวดหนาม" &&
-                productInfo.productName !== "กิ๊บลวดหนาม" ? (
-                  <p className="kanit-medium text-[#154360]">
-                    ตา :
-                    <select
-                      name="text"
-                      type=""
-                      value={gauge}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-24 ml-16 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handlegauge}
-                    >
-                      <option value="">เลือก</option>
-                      {productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ? (
-                        <>
-                          {ProductType === "- แบบ 2 เส้น" ? (
-                            <>
-                              <option value="30m.">30m.</option>
-                              <option value="50m.">40m.</option>
-                              <option value="30m.">30m.</option>
-                              <option value="50m.">40m.</option>
-                              <option value="30m.">30m.</option>
-                              <option value="50m.">40m.</option>
-                              <option value="25m.">25m.</option>
-                              </>
-                          ) : ( ProductType === "- แบบ 3 เส้น" ? (
-                            <>
-                              <option value="25m.">25m.</option>
-                              </>
-                              ) : null)}
-                            </>
-                ) : productInfo.productName ===
-                      "รั้วแรงดึง (ตาข่ายถักปม)" ? (
-                        <>
-                          <option value="10x10 cm เท่ากัน">
-                            10x10 cm เท่ากัน
-                          </option>
-                          <option value="15 cm ไม่เท่ากัน (ถี่ล่าง ห่างบน)">
-                            15 cm ไม่เท่ากัน (ถี่ล่าง ห่างบน)
-                          </option>
+                          {barbedsize !== "ระบุเป็นความยาวที่ใช้" && (
+                            <option value="ขด">ขด</option>
+                          )}
+                          {barbedsize === "ระบุเป็นความยาวที่ใช้" && (
+                            <option value="เมตร">เมตร</option>
+                          )}
                         </>
                       ) : productInfo.productName ===
                         "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
                         <>
-                          <option value='3/4" เต็ม'>3/4" เต็ม</option>
-                          <option value='1" เต็ม'>1" เต็ม</option>
-                          <option value='1-1/2" เต็ม'>1-1/2" เต็ม</option>
-                          <option value='2" เต็ม'>2" เต็ม</option>
+                          <option value="แผ่น">แผ่น</option>
+                          <option value="ตารางเมตร">ตารางเมตร</option>
                         </>
                       ) : (
                         <>
-                          <option value='1" เต็ม'>1" เต็ม</option>
-                          <option value='1" ทั่วไป'>1" ทั่วไป</option>
-                          <option value='1-1/2" เต็ม'>1-1/2" เต็ม</option>
-                          <option value='1-1/2" ทั่วไป'>1-1/2" ทั่วไป</option>
-                          <option value='2" เต็ม'>2" เต็ม</option>
-                          <option value='2" ทั่วไป'>2" ทั่วไป</option>
-                          <option value='2-1/2" เต็ม'>2-1/2" เต็ม</option>
-                          <option value='2-1/2" ทั่วไป'>2-1/2" ทั่วไป</option>
-                          <option value='3" เต็ม'>3" เต็ม</option>
-                          <option value='3" ทั่วไป'>3" ทั่วไป</option>
+                          <option value="ม้วน">ม้วน</option>
+                          <option value="ตารางเมตร">ตารางเมตร</option>
                         </>
                       )}
                     </select>
                   </p>
-                ) : null}
-                {productInfo.productName !== "ปลอกเสา-ปลอกคาน" &&
-                productInfo.productName !== "ปลอกสามเหลี่ยม" &&
-                productInfo.productName !== "ปลอกสี่เหลี่ยม" &&
-                productInfo.productName !== "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" &&
-                productInfo.productName !== "ตะปูตอกไม้" &&
-                productInfo.productName !== "ลวดหนาม" &&
-                productInfo.productName !== "กิ๊บลวดหนาม" ? (
-                  <p className="kanit-medium text-[#154360]">
-                    ขนาด(ต่อม้วน) :
-                    <select
-                      name="text"
-                      type=""
-                      value={coil}
-                      placeholder="เลือก"
-                      className="text-[#ff9800] w-28 ml-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                      onChange={handlecoil}
-                    >
-                      <option value="">เลือก</option>
-                      {productInfo.productName === "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
-                        <>
-                          <option value="0.9x25 m.">0.9x25 m.</option>
-                          <option value="0.9x30 m.">0.9x30 m.</option>
-                          <option value="1.2x30 m.">1.2x30 m.</option>
-                        </>
-                ) : productInfo.productName ===
-                      "รั้วแรงดึง (ตาข่ายถักปม)" ? (
-                        <>
-                          <option value="0.9x30 m.">0.9x30 m.</option>
-                          <option value="0.9x50 m.">0.9x50 m.</option>
-                          <option value="0.9x100 m.">0.9x100 m.</option>
-                          <option value="1.2x30 m.">1.2x30 m.</option>
-                          <option value="1.2x50 m.">1.2x50 m.</option>
-                          <option value="1.2x100 m.">1.2x100 m.</option>
-                          <option value="1.5x30 m.">1.5x30 m.</option>
-                          <option value="1.5x50 m.">1.5x50 m.</option>
-                          <option value="1.5x100 m.">1.5x100 m.</option>
-                          <option value="1.65x30 m.">1.65x30 m.</option>
-                          <option value="1.65x50 m.">1.65x50 m.</option>
-                          <option value="1.65x100 m.">1.65x100 m.</option>
-                          <option value="1.8x30 m.">1.8x30 m.</option>
-                          <option value="1.8x50 m.">1.8x50 m.</option>
-                          <option value="1.8x100 m.">1.8x100 m.</option>
-                          <option value="2.0x30 m.">2.0x30 m.</option>
-                          <option value="2.0x50 m.">2.0x50 m.</option>
-                          <option value="2.0x100 m.">2.0x100 m.</option>
-                        </>
-                      ) : productInfo.productName ===
-                        "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
-                        <>
-                          <option value="1x20 m.">1x20 m.</option>
-                          <option value="1.2x2.4 m.">1.2x2.4 m.</option>
-                          <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
-                        </>
-                      ) : (
-                        <>
-                          <option value="0.8x10 m.">0.8x10 m.</option>
-                          <option value="1.0x10 m.">1.0x10 m.</option>
-                          <option value="1.2x10 m.">1.2x10 m.</option>
-                          <option value="1.5x10 m.">1.5x10 m.</option>
-                          <option value="1.8x10 m.">1.8x10 m.</option>
-                          <option value="2.0x10 m.">2.0x10 m.</option>
-                          <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
-                        </>
-                      )}
-                    </select>
-                    {coil === "ระบุขนาดเอง" && (
-                      <p className="kanit-medium text-[#154360]">
-                        ขนาด(ตรม.) :
-                        <input
-                          name="customsize"
-                          value={customsize}
-                          onChange={handlecustomsize}
-                          placeholder="กว้างxยาว m."
-                          className="text-[#ff9800] w-28 ml-9 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                        ></input>
-                      </p>
-                    )}
-                  </p>
-                ) : null}
-                <p className="kanit-medium text-[#154360]">
-                  จำนวน :
-                  <input
-                    name="Number"
-                    type="Number"
-                    min={1}
-                    maxLength={10000}
-                    step={1}
-                    value={Number}
-                    onChange={handleNumber}
-                    placeholder=""
-                    className="text-[#ff9800] w-24 ml-4 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                  ></input>
-                </p>
-                <p className="kanit-medium text-[#154360]">
-                  หน่วย :
-                  <select
-                    name="Unit"
-                    value={Unit}
-                    onChange={handleUnit}
-                    className="text-[#ff9800] w-24 ml-6 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                  >
-                    <option value="">เลือก</option>
-                    {productInfo.productName === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" || productInfo.productName === "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
-                      <>
-                        {/* <option value="ขด">ขด</option> */}
-                        <option value="ม้วน">ม้วน</option>
-                      </>
-                    ) : productInfo.productName === "ตะปูตอกไม้" ? (
-                      <>
-                        <option value="ลัง">ลัง (18kg/ลัง)</option>
-                      </>
-                    ) : productInfo.productName === "ปลอกเสา-ปลอกคาน" || productInfo.productName === "ปลอกสามเหลี่ยม" || productInfo.productName === "ปลอกสี่เหลี่ยม" ? (
-                      <>
-                        <option value="ตัว">ตัว</option>
-                        <option value="มัด">มัด (50ตัว/มัด)</option>
-                        <option value="กระสอบ">
-                          กระสอบ (25กิโลกรัม/กระสอบ)
-                        </option>
-                      </>
-                    ) : productInfo.productName === "กิ๊บลวดหนาม" ? (
-                      <>
-                        <option value="ตัว">ตัว</option>
-                        <option value="กระสอบ">
-                          กระสอบ (25กิโลกรัม/กระสอบ)
-                        </option>
-                      </>
-                    ) : productInfo.productName === "ลวดหนาม" ? (
-                      <>
-                        {barbedsize !== "ระบุเป็นความยาวที่ใช้" && (
-                          <option value="ขด">ขด</option>
-                        )}
-                        {barbedsize === "ระบุเป็นความยาวที่ใช้" && (
-                          <option value="เมตร">เมตร</option>
-                        )}
-                      </>
-                    ) : productInfo.productName ===
-                      "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
-                      <>
-                        <option value="แผ่น">แผ่น</option>
-                        <option value="ตารางเมตร">ตารางเมตร</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="ม้วน">ม้วน</option>
-                        <option value="ตารางเมตร">ตารางเมตร</option>
-                      </>
-                    )}
-                  </select>
-                </p>
 
-                <p className="kanit-medium text-[#154360]">
-                  จัดส่ง :
-                  <select
-                    name="text"
-                    type=""
-                    value={delivery}
-                    placeholder="เลือก"
-                    className="text-[#ff9800] w-24 ml-6 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                    onChange={handledelivery}
-                  >
-                    <option value="">เลือก</option>
-                    <option value="รับเอง">รับเอง</option>
-                    <option value="บริษัทจัดส่ง">บริษัทจัดส่ง</option>
-                  </select>
-                </p>
+                  <p className="kanit-medium sm:text-[13px] md:text-[15px] text-[#154360]">
+                    จัดส่ง :
+                    <select
+                      name="text"
+                      type=""
+                      value={delivery}
+                      placeholder="เลือก"
+                      className="text-[#ff9800] w-20 h-9 md:w-24 md:h-10 md:ml-6 mb-5 md:mb-5 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                      onChange={handledelivery}
+                    >
+                      <option value="">เลือก</option>
+                      <option value="รับเอง">รับเอง</option>
+                      <option value="บริษัทจัดส่ง">บริษัทจัดส่ง</option>
+                    </select>
+                  </p>
+                </div>
               </form>
-              <form ref={formRef}></form>
             </span>
             <hr />
             <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
@@ -706,7 +717,7 @@ const ProductInfo = ({ productInfo }) => {
                 </div>
               </Link>
             </div>
-            <div className="mx-auto mt-10 flex justify-center items-center">
+            <div className="mx-auto mt-5 md:mt-10 flex justify-center items-center">
               <span>
                 <button
                   className="w-20 mr-3 h-10 px-4 py-2 bg-[#154360] kanit-medium text-white text-center rounded-xl hover:bg-[#E74C3C] hover:text-white"

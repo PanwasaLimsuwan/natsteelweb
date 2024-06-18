@@ -1,19 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
-import {
-  FaFacebook,
-  FaEnvelope,
-  FaPhone,
-  FaBuilding,
-  FaFax,
-  FaMobile,
-  FaClock,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
 import "../../assets/font.css";
-// import emailjs from "emailjs-com";
-// import LineButton from "../../components/home/Footer/LineButton";
 
 const Contact = () => {
   const location = useLocation();
@@ -86,55 +74,34 @@ const Contact = () => {
   };
   // ================= Email Validation End here ===============
 
-  // const SendEmail = (e) => {
-  //   e.preventDefault();
-
-  //   emailjs
-  //     .sendForm(
-  //       "service_6g4kwau",
-  //       "template_7m7mmh6",
-  //       // e.target,
-  //       formRef.current,
-  //       "CZiqTlmdXR4uH8Wwd"
-  //       // ).then(res=>{
-  //       //     console.log(res);
-  //       // }).catch(err => console.log(err))
-  //     )
-  //     .then((res) => {
-  //       console.log("Email successfully sent!");
-  //       // setSuccessMsg(`ขอบคุณที่ติดต่อเรา คุณ${clientName} ข้อความของคุณได้ทำการส่งเรียบร้อยแล้ว เราจะรีบตอบกลับในภายหลังไปที่ ${email}.`);
-  //     })
-  //     .catch((err) => {
-  //       console.error("Failed to send email:", err);
-  //     });
-  // };
-
   // const handlePost = (e) => {
   //   e.preventDefault();
-  //   // console.log("Name valid:", clientName);
-  //   // console.log("Email valid:", EmailValidation(email));
-  //   // console.log("Tel valid:", TelValidation(tel));
-  //   // console.log("Message filled:", messages);
   //   if (!clientName) {
   //     setErrClientName("กรุณากรอกชื่อ-นามสกุล");
   //   }
+  //   // else {
+  //   //   if (!ClientNameValidation(clientName)) {
+  //   //     setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
+  //   //   }
+  //   // }
   //   if (!email) {
   //     setErrEmail("กรุณากรอกอีเมล");
   //   } else {
   //     if (!EmailValidation(email)) {
-  //       setErrEmail("กรุณากรอกอีเมล");
+  //       setErrEmail("กรุณากรอกอีเมลให้ถูกต้อง");
   //     }
   //   }
   //   if (!tel) {
   //     setErrTel("กรุณากรอกเบอร์โทรศัพท์");
   //   } else {
   //     if (!TelValidation(tel)) {
-  //       setErrTel("กรุณากรอกเบอร์โทรศัพท์");
+  //       setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
   //     }
   //   }
   //   if (!messages) {
   //     setErrMessages("กรุณากรอกข้อความ");
   //   }
+
   //   if (
   //     clientName &&
   //     email &&
@@ -143,103 +110,103 @@ const Contact = () => {
   //     TelValidation(tel) &&
   //     messages
   //   ) {
-  //     SendEmail(e);
-  //     setSuccessMsg(
-  //       `ขอบคุณที่ติดต่อเรา คุณ${clientName}  ข้อความของคุณได้ทำการส่งเรียบร้อยแล้ว เราจะรีบตอบกลับในภายหลังไปที่ ${email}.`
-  //     );
-  //   }
+  //     const formData = {
+  //       clientName,
+  //       email,
+  //       tel,
+  //       messages,
+  //     };
 
-  const handlePost = (e) => {
+  //     fetch("http://localhost:3001/Contact", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("Success:", data);
+  //         alert("ส่งข้อมูลสําเร็จ");
+  //         // Reset the form and cart after successful submission
+  //         setclientName("");
+  //         setEmail("");
+  //         setTel("");
+  //         setMessages("");
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error:", error);
+  //       });
+  //   }
+  // };
+
+  const handlePost = async (e) => {
     e.preventDefault();
+  
+    let isValid = true;
+  
     if (!clientName) {
       setErrClientName("กรุณากรอกชื่อ-นามสกุล");
-    } 
-    // else {
-    //   if (!ClientNameValidation(clientName)) {
-    //     setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
-    //   }
-    // }
+      isValid = false;
+    }
     if (!email) {
       setErrEmail("กรุณากรอกอีเมล");
-    } else {
-      if (!EmailValidation(email)) {
-        setErrEmail("กรุณากรอกอีเมลให้ถูกต้อง");
-      }
+      isValid = false;
+    } else if (!EmailValidation(email)) {
+      setErrEmail("กรุณากรอกอีเมลให้ถูกต้อง");
+      isValid = false;
     }
     if (!tel) {
       setErrTel("กรุณากรอกเบอร์โทรศัพท์");
-    } else {
-      if (!TelValidation(tel)) {
-        setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
-      }
+      isValid = false;
+    } else if (!TelValidation(tel)) {
+      setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+      isValid = false;
     }
     if (!messages) {
       setErrMessages("กรุณากรอกข้อความ");
+      isValid = false;
     }
-
-    if (
-      clientName &&
-      email &&
-      EmailValidation(email) &&
-      tel &&
-      TelValidation(tel) &&
-      messages
-    ) {
+  
+    if (isValid) {
       const formData = {
         clientName,
         email,
         tel,
         messages,
       };
-
-      fetch("http://localhost:3001/Contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          alert("ส่งข้อมูลสําเร็จ");
-          // Reset the form and cart after successful submission
-          setclientName("");
-          setEmail("");
-          setTel("");
-          setMessages("");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+  
+      try {
+        const response = await fetch("http://localhost:3001/Contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         });
+  
+        if (!response.ok) {
+          throw new Error("เครือข่ายไม่ตอบสนอง");
+        }
+  
+        const data = await response.json();
+        console.log("Success:", data);
+        alert("ส่งข้อมูลสําเร็จ");
+  
+        // Reset the form and clear the state after successful submission
+        setclientName("");
+        setEmail("");
+        setTel("");
+        setMessages("");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง");
+      }
     }
-    // emailjs.sendForm(
-    //   "service_6g4kwau",
-    //   "template_7m7mmh6",
-    //   form.target,
-    //   "d2tVQPDPk3A8gorqA"
-    // ).then(res=>{
-    //     console.log(res);
-    // }).catch(err => console.log(err))
-    // if (form.current) {
-    //   emailjs.sendForm(
-    //     "service_6g4kwau",
-    //     "template_7m7mmh6",
-    //     form.current,
-    //     "d2tVQPDPk3A8gorqA"
-    //   ).then(res => {
-    //     console.log(res);
-    //     // setSuccessMsg(
-    //     //   `ขอบคุณที่ติดต่อเรา คุณ${clientName}  ข้อความของคุณได้ทำการส่งเรียบร้อยแล้ว เราจะรีบตอบกลับในภายหลังไปที่ ${email}.`
-    //     // );
-    //   }).catch(err => {
-    //     console.log(err);
-    //   });
-    // }
   };
+  
 
   return (
-    // <div className="max-w-container mx-auto px-4">
     <div className="max-w-container mx-auto mb-20 px-4 flex flex-wrap">
       <Breadcrumbs title="ช่องทางการติดต่อ" />
       {successMsg ? (
@@ -247,15 +214,13 @@ const Contact = () => {
           {successMsg}
         </p>
       ) : (
-        // <form ref={formRef} className="pb-20">
-        <div className="w-1/2">
-          <form ref={formRef} className="pl-20">
+        <div className="lg:w-1/2 md:w-1/2 w-full">
+          <form ref={formRef} className="md:pl-20">
             <h1 className="kanit-semibold text-[#154360] text-3xl">
               ติดต่อ / สอบถาม
             </h1>
-            <div className="w-[500px] h-auto py-6 flex flex-col gap-6">
+            <div className="md:w-[500px] h-auto py-6 flex flex-col gap-6">
               <div>
-                {/* <label>Name</label> */}
                 <p className="kanit-medium text-[#154360] px-2">ชื่อ-นามสกุล</p>
                 <input
                   name="name"
@@ -274,12 +239,10 @@ const Contact = () => {
                 )}
               </div>
               <div>
-                {/* <label>Email</label> */}
                 <p className="kanit-medium text-[#154360] px-2">อีเมล</p>
                 <input
                   name="email"
                   onChange={handleEmail}
-                  // onSubmit={SendEmail}
                   value={email}
                   maxLength={40}
                   className="w-full py-1 border-b-2 px-2 kanit-medium text-[#ff9800] placeholder:font-normal placeholder:text-sm outline-none focus-within:border-[#ff9800]"
@@ -294,7 +257,6 @@ const Contact = () => {
                 )}
               </div>
               <div>
-                {/* <label>Tel</label> */}
                 <p className="kanit-medium text-[#154360] px-2">เบอร์ติดต่อ</p>
                 <input
                   name="Tel"
@@ -313,7 +275,6 @@ const Contact = () => {
                 )}
               </div>
               <div>
-                {/* <label>Messages</label> */}
                 <p className="kanit-medium text-[#154360] px-2">
                   ข้อสงสัย / ความคิดเห็น
                 </p>
@@ -337,9 +298,6 @@ const Contact = () => {
               <div className="text-center">
                 <button
                   onClick={handlePost}
-                  // type="submit"
-                  // value={send}
-                  // onClick={SendEmail}
                   className="w-32 h-12 bg-[#154360] text-lg text-white kanit-medium tracking-wide rounded-xl hover:bg-[#ff9800]  duration-200"
                 >
                   ส่งข้อมูล
@@ -349,22 +307,19 @@ const Contact = () => {
           </form>
         </div>
       )}
-      <div className="w-1/2 col-span-1">
+      <div className="w-full md:w-1/2 mt-10 md:mt-0">
         <h1 className="kanit-semibold text-3xl text-[#154360] mb-10">
           บริษัท นัทสตีล จำกัด
         </h1>
-        <p className="kanit-medium text-[#154360] mb-5 ml-10">
+        <p className="kanit-medium text-[#154360] mb-5 ml-0 md:ml-10">
           เวลาทำการ จันทร์ - เสาร์ เวลา 08:00 น. - 17:00 น.
         </p>
-        {/* <div className="col-span-1 mb-10 md:mb-0 footer-bottom"> */}
-        {/* <FooterListTitle className="center font-titleFont" title="สนใจติดต่อ" /> */}
         <iframe
           src="https://www.google.com/maps/embed/v1/place?q=บริษัท+นัท+สตีล+จำกัด+ตำบล+พงตึก+อำเภอท่ามะกา+กาญจนบุรี+ประเทศไทย&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
-          // className="cursor-pointer"
-          width="650"
-          height="350"
+          // width="650"
+          // height="350"
+          className="w-full md:w-[650px] h-64 md:h-[350px]"
           title="Google maps Footer"
-          // style={{ cursor: "pointer" }}
           loading="lazy"
           allowFullScreen
         ></iframe>
@@ -375,9 +330,6 @@ const Contact = () => {
             </button>
           </a>
         </div>
-        {/* <p className="kanit-medium text-[#154360] mt-5 ml-10">
-          ที่อยู่ : เลขที่ 11/5 หมู่ที่ 2 ตำบล พงตึก อำเภอท่ามะกา จังหวัดกาญจนบุรี 71120
-          </p> */}
       </div>
     </div>
   );

@@ -1,19 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { HiOutlineMenuAlt4 } from "react-icons/hi";
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import Flex from "../../designLayouts/Flex";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { paginationItems } from "../../../constants";
+import { useNavigate, useLocation } from "react-router-dom";
 import { allproduct } from "../../../constants";
-import { BsSuitHeartFill } from "react-icons/bs";
 import "../../../assets/font.css";
 
 const HeaderBottom = () => {
-  const products = useSelector((state) => state.orebiReducer.products);
   const [show, setShow] = useState(false);
-  const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
   const ref = useRef();
   const location = useLocation();
@@ -44,28 +37,6 @@ const HeaderBottom = () => {
 
   const isHomePage = location.pathname === "/";
 
-  // useEffect(() => {
-  //   if (allproduct && allproduct.length > 0) {
-  //     const filtered = allproduct.filter((item) =>
-  //       item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-  //     );
-  //     setFilteredProducts(filtered);
-  //   }
-  // }, [searchQuery]);
-  
-  // useEffect(() => {
-  //   if (allproduct && allproduct.length > 0) {
-  //     const filtered = allproduct.filter((item) =>
-  //       item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-  //     );
-  //     setFilteredProducts(filtered);
-  //   } else {
-  //     console.log('allproduct is not defined or empty:', allproduct);
-  //   }
-  // }, [searchQuery, allproduct]);
-  
-  // console.log('allproduct:', allproduct);
-
   return (
     <div className="w-full bg-[#F5F5F3] relative">
       <div className="max-w-container mx-auto">
@@ -76,39 +47,6 @@ const HeaderBottom = () => {
             ref={ref}
             className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"
           >
-            {/* <HiOutlineMenuAlt4 className="w-5 h-5" />
-            <p className="text-[14px] font-normal">Shop by Category</p>
-
-            {show && (
-              <motion.ul
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="absolute top-36 z-50 bg-primeColor w-auto text-[#767676] h-auto p-4 pb-6"
-              >
-                <Link to={"category/imprimante"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Imprimante
-                  </li>
-                </Link>
-
-                <Link to={"category/ancre"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    ancre
-                  </li>
-                </Link>
-                <Link to={"category/Ruban"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    ruban
-                  </li>
-                </Link>
-                <Link to={"category/Bac"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Bac de dechet
-                  </li>
-                </Link>
-              </motion.ul> */}
-            {/* )} */}
           </div>
           <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center justify-center gap-2 px-6 rounded-xl">            
           <input
@@ -119,7 +57,6 @@ const HeaderBottom = () => {
               placeholder="ค้นหาสินค้า"
             />
             <FaSearch className="w-5 h-5 text-[#C4C4C4] hover:text-[#ff9800]" />
-            {/* <FaSearch className="mx-2" /> */}
             {searchQuery && (
               <div
                 className={`w-full mx-auto h-96 bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
@@ -150,63 +87,12 @@ const HeaderBottom = () => {
                         <p className="kanit-semibold text-lg text-[#154360] hover:text-[#ff9800]">
                           {item.productName}
                         </p>
-                        {/* <p className="text-xs">
-                          {item.des.length > 100
-                            ? `${item.des.slice(0, 100)}...`
-                            : item.des}
-                        </p> */}
-                        {/* <p className="text-sm">
-                          Price:{" "}
-                          <span className="text-primeColor font-semibold">
-                            ${item.price}
-                          </span>
-                        </p> */}
                       </div>
                     </div>
                   ))}
               </div>
             )}
           </div>
-          {/* <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
-            <div onClick={() => setShowUser(!showUser)} className="flex">
-              <FaUser />
-              <FaCaretDown />
-            </div>
-            {showUser && (
-              <motion.ul
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="absolute top-6 left-0 z-50 bg-primeColor w-44 text-[#767676] h-auto p-4 pb-6"
-              >
-                <Link to="/signin">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Login
-                  </li>
-                </Link>
-                <Link onClick={() => setShowUser(false)} to="/signup">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Sign Up
-                  </li>
-                </Link>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Profile
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Others
-                </li>
-              </motion.ul>
-            )}
-            <Link to="/cart">
-              <div className="relative">
-                <FaShoppingCart />
-                <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
-                  {products.length > 0 ? products.length : 0}
-                </span>
-              </div>
-            </Link>
-            <BsSuitHeartFill /> */}
-          {/* </div> */}
         </Flex>
         )}
       </div>

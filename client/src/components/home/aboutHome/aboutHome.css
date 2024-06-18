@@ -1,0 +1,46 @@
+/* Desktop layout */
+.container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .iconContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .icon {
+    width: 25%;
+  }
+  
+  /* Tablet layout */
+  @media (max-width: 1024px) {
+    .container {
+      width: 90%;
+    }
+  
+    .iconContainer {
+      flex-direction: column;
+    }
+  
+    .icon {
+      width: 50%;
+    }
+  }
+  
+  /* Mobile layout */
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+  
+    .iconContainer {
+      flex-direction: column;
+    }
+  
+    .icon {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  

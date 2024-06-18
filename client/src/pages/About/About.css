@@ -1,4 +1,4 @@
-.custom-banner-a {
+.custom-banner-i2 {
     width: 600px; /* Full width of the viewport */
     height: 300px; /* Full height of the viewport */
     object-fit: cover; /* Ensures the image covers the container without distortion */
@@ -21,5 +21,14 @@
     transition: transform 0.3s; /* Smooth transition effect */
     cursor: pointer;
   } 
-
+  
+  /* Mobile layout */
+  @media (max-width: 768px) {
+    .custom-banner-container {
+        width: 250px; /* Full width of the viewport */
+        height: 250px; /* Full height of the viewport */
+        object-fit: cover; /* Ensures the image covers the container without distortion */
+        border: none; /* Remove border for full screen */
+    }
+  }
   

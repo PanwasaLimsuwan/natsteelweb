@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { resetCart } from "../../redux/orebiSlice";
 import { emptyCart } from "../../assets/images/index";
-import ItemCard from "../../pages/Cart/ItemCard";
+import ItemCard from "../../pages/ItemCard/ItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import "../../assets/font.css";
@@ -212,15 +212,13 @@ const Quotation = (item) => {
   };
 
   const FaxValidation = (fax) => {
-    return (
-      String(fax)
-        .toLowerCase()
-        .match(/[0-9-]{1,20}$/)
-    );
+    return String(fax)
+      .toLowerCase()
+      .match(/[0-9-]{1,20}$/);
   };
 
-  const handlePost = (e) => {
-    let hasError = false;
+  const handlePost = async (e) => {
+    let isValid = false;
     e.preventDefault(); // Prevent form submission
 
     if (products.length === 0) {
@@ -231,61 +229,61 @@ const Quotation = (item) => {
     // ตรวจสอบข้อมูลที่กรอกในแต่ละฟิลด์
     if (!clientName) {
       setErrClientName("กรุณากรอกชื่อ-นามสกุล");
-      hasError = true;
+      let isValid = true;
     }
     //  else if (!ClientNameValidation(clientName)) {
     //   setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
-    //   hasError = true;
+    //   isValid = true;
     // }
     if (!email) {
       setErrEmail("กรุณากรอกอีเมล");
-      hasError = true;
+      isValid = true;
     } else if (!EmailValidation(email)) {
       setErrEmail("กรุณากรอกอีเมลให้ถูกต้อง");
-      hasError = true;
+      isValid = true;
     }
     if (!tel) {
       setErrTel("กรุณากรอกเบอร์โทรศัพท์");
-      hasError = true;
+      isValid = true;
     } else if (!TelValidation(tel)) {
       setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
-      hasError = true;
+      isValid = true;
     }
     if (!mobile) {
       setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือ");
-      hasError = true;
+      isValid = true;
     } else if (!MobileValidation(mobile)) {
       setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง");
-      hasError = true;
+      isValid = true;
     }
     // if (!fax) {
     //   setErrFax("กรุณากรอกหมายเลขแฟกซ์");
-    //   hasError = true;
+    //   isValid = true;
     // } else if (!FaxValidation(fax)) {
     //   setErrFax("กรุณากรอกหมายเลขแฟกซ์ให้ถูกต้อง");
-    //   hasError = true;
+    //   isValid = true;
     // }
     if (!FaxValidation) {
       setErrFax("กรุณากรอกหมายเลขแฟกซ์ให้ถูกต้อง");
-      hasError = true;
+      isValid = true;
     }
     if (!province) {
       setErrProvince("กรุณาเลือกจังหวัด");
-      hasError = true;
+      isValid = true;
     }
     if (!company) {
       setErrCompany("กรุณากรอกชื่อหน่วยงาน");
-      hasError = true;
+      isValid = true;
     }
     if (!branch) {
       setErrBranch("กรุณากรอกสาขา");
-      hasError = true;
+      isValid = true;
     }
     if (!Address) {
       setErrAddress("กรุณากรอกที่อยู่");
-      hasError = true;
-    }  
-    if (!hasError) {
+      isValid = true;
+    }
+    if (!isValid) {
       // ส่งข้อมูล
       const formData = {
         clientName,
@@ -314,42 +312,43 @@ const Quotation = (item) => {
           // ProductType: item.ProductType,
         })),
       };
-      // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
-      fetch("http://localhost:3001/Quotation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          alert("ส่งคำใบคำร้องสําเร็จ");
-          // Reset the form and cart after successful submission
-          dispatch(resetCart());
-          setclientName("");
-          setEmail("");
-          setTel("");
-          setMobile("");
-          setFax("");
-          setCompany("");
-          setBranch("");
-          setProvince("");
-          setAddress("");
-          setMessages("");
-          setProductsData([]);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+      try {
+        const response = await fetch("http://localhost:3001/Quotation", {
+          // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         });
+        if (!response.ok) {
+          throw new Error("เครือข่ายไม่ตอบสนอง");
+        }
+        const data = await response.json();
+        alert("ส่งคำใบคำร้องสําเร็จ");
+        // Reset the form and cart after successful submission
+        dispatch(resetCart());
+        setclientName("");
+        setEmail("");
+        setTel("");
+        setMobile("");
+        setFax("");
+        setCompany("");
+        setBranch("");
+        setProvince("");
+        setAddress("");
+        setMessages("");
+        setProductsData([]);
+      } catch (error) {
+        alert("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง");
+      }
     }
   };
 
   return (
     <div className="max-w-container mx-auto flex flex-wrap">
       <Breadcrumbs title="ข้อมูลผู้ติดต่อ" />
-      <div className="w-1/2 pl-10">
+      <div className="w-full md:w-1/2 md:pl-10">
         {successMsg ? (
           <p className="pb-20 font-medium text-green-500 text-xl">
             {successMsg}
@@ -359,43 +358,35 @@ const Quotation = (item) => {
             <input
               type="hidden"
               name="productsData"
-              value={
-                products.map((item) => {
-                  if (item.name === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" || item.name === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)") {
-                      return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  } 
-                  else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
-                    return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "ลวดหนาม") {
-                    return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "กิ๊บลวดหนาม") {
-                    return `สินค้า : ${item.name} ความยาว : ${item.clipsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "ปลอกเสา-ปลอกคาน") {
-                    return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "ปลอกสามเหลี่ยม") {
-                    return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "ปลอกสี่เหลี่ยม") {
-                    return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "ตะปูตอกไม้") {
-                    return `สินค้า : ${item.name} ขนาดตะปู : ${item.nailsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป") {
-                    return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  else if (item.name === "รั้วแรงดึง (ตาข่ายถักปม)") {
-                    return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                  }
-                  return null;
-                })
-              }
+              value={products.map((item) => {
+                if (
+                  item.name === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
+                  item.name === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)"
+                ) {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ลวดหนาม") {
+                  return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "กิ๊บลวดหนาม") {
+                  return `สินค้า : ${item.name} ความยาว : ${item.clipsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกเสา-ปลอกคาน") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกสามเหลี่ยม") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ปลอกสี่เหลี่ยม") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ตะปูตอกไม้") {
+                  return `สินค้า : ${item.name} ขนาดตะปู : ${item.nailsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "รั้วแรงดึง (ตาข่ายถักปม)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                }
+                return null;
+              })}
             />
-            <div className="kanit-medium text-[#154360] w-[500px] pl-10 h-auto py-6 flex flex-col gap-6">
+            <div className="kanit-medium text-[#154360] w-full md:w-[500px] pl-5 md:pl-10 h-auto py-6 flex flex-col gap-6">
               <div>
                 <p className="kanit-medium px-2">ชื่อ-นามสกุล</p>
                 <input
@@ -590,23 +581,23 @@ const Quotation = (item) => {
                   placeholder="กรุณากรอกข้อความ"
                 ></textarea>
               </div>
-              </div>
-              <button
-                onClick={handlePost}
-                className="w-36 h-14 ml-44 kanit-medium text-lg text-white bg-[#154360] rounded-lg font-semibold hover:bg-[#ff9800] hover:text-white duration-200"
-              >
-                ส่งใบคำร้อง
-              </button>
+            </div>
+            <button
+              onClick={handlePost}
+              className="w-36 h-14 ml-36 md:ml-44 kanit-medium text-lg text-white bg-[#154360] rounded-lg font-semibold hover:bg-[#ff9800] hover:text-white duration-200"
+            >
+              ส่งใบคำร้อง
+            </button>
           </form>
         )}
       </div>
-      <div className="w-1/2 mt-10">
+      <div className="w-full md:w-1/2 mt-0 md:mt-10">
         {products.length > 0 ? (
           <div className="pb-20">
             <div className="w-full h-20 bg-[#F5F7F7] kanit-medium text-[#154360] hidden lgl:grid grid-cols-3 place-content-center text-lg">
-              <h2 className="pl-8">รายการสินค้า</h2>
-              <h2 className="pl-72">จำนวน</h2>
-              <h2 className="pl-44">หน่วย</h2>
+              <h2 className="md:pl-8">รายการสินค้า</h2>
+              <h2 className="md:pl-72">จำนวน</h2>
+              <h2 className="md:pl-44">หน่วย</h2>
             </div>
             {/* -------------------------------------- */}
             <div className="mt-5">
@@ -637,9 +628,7 @@ const Quotation = (item) => {
             </button>
 
             <Link to="/shop">
-              <button
-                className="kanit-medium ml-5 py-3 px-5 bg-green-500 rounded-xl text-white font-semibold uppercase mb-4 hover:bg-green-700 hover:text-[#2ECC71] duration-300"
-              >
+              <button className="kanit-medium ml-5 py-3 px-5 bg-green-500 rounded-xl text-white font-semibold uppercase mb-4 hover:bg-green-700 hover:text-[#2ECC71] duration-300">
                 เพิ่มสินค้า
               </button>
             </Link>
@@ -673,7 +662,7 @@ const Quotation = (item) => {
                 alt="emptyCart"
               />
             </div>
-            <div className="max-w-[500px] p-4 py-8 bg-white flex gap-4 flex-col items-center rounded-xl shadow-xl">
+            <div className="max-w-[500px] p-4 bg-white flex gap-4 flex-col items-center rounded-xl shadow-xl">
               <h1 className="kanit-medium text-xl text-[#154360] uppercase">
                 ไม่มีสินค้า
               </h1>
