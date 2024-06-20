@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f5ac3aa3.css",
-    "main.js": "/static/js/main.b1b4328e.js",
+    "main.css": "/static/css/main.9b32c5a1.css",
+    "main.js": "/static/js/main.7f2b1386.js",
     "static/media/ลวดหนาม2.png": "/static/media/ลวดหนาม2.4e172a84bfc31aa85be7.png",
     "static/media/เหล็กวงบ่อ.png": "/static/media/เหล็กวงบ่อ.9a9f12660dca45c3f6ac.png",
     "static/media/กรงไก่3.png": "/static/media/กรงไก่3.09fb8450d9503b5596c7.png",
@@ -37,11 +37,11 @@
     "static/media/service.png": "/static/media/service.6078f6626645348e160e.png",
     "static/media/qrcode.png": "/static/media/qrcode.b576f6d079a3b8291a72.png",
     "index.html": "/index.html",
-    "main.f5ac3aa3.css.map": "/static/css/main.f5ac3aa3.css.map",
-    "main.b1b4328e.js.map": "/static/js/main.b1b4328e.js.map"
+    "main.9b32c5a1.css.map": "/static/css/main.9b32c5a1.css.map",
+    "main.7f2b1386.js.map": "/static/js/main.7f2b1386.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5ac3aa3.css",
-    "static/js/main.b1b4328e.js"
+    "static/css/main.9b32c5a1.css",
+    "static/js/main.7f2b1386.js"
   ]
 }
