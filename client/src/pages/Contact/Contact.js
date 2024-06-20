@@ -52,20 +52,21 @@ const Contact = () => {
   };
 
   // ================= Email Validation start here =============
-  
+
   const ClientNameValidation = (clientName) => {
-    return String(clientName)
-      .toLowerCase()
-      // .match(/^[A-Za-zก-๙]+$/);
-      // .match(/^([A-Za-zก-๙]+\s[A-Za-zก-๙]+)$/);
-      .match(/^([A-Za-zก-๙]+(?:\s+[A-Za-zก-๙]+)+)$/);
+    return (
+      String(clientName)
+        .toLowerCase()
+        // .match(/^[A-Za-zก-๙]+$/);
+        .match(/^([A-Za-zก-๙]+(?:\s+[A-Za-zก-๙]+)+)$/)
+    );
+    // .match(/^[^\s]+( [\u0E00-\u0E7FA-Za-z]+)*$/);
   };
 
   const EmailValidation = (email) => {
     return String(email)
       .toLowerCase()
       .match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
-      // .match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.th|net|org|edu|gov|mil|biz|info)$/i);
   };
 
   const TelValidation = (tel) => {
@@ -74,7 +75,6 @@ const Contact = () => {
         .toLowerCase()
         // .match(/^[0][0-9]{2}[-\s]?[0-9]{3}[-\s]?[0-9]{4}$/);
         .match(/^0[0-9]{9}$/)
-        // .match(/^\d{3}-?\d{3}-?\d{4}$/)
     );
   };
   // ================= Email Validation End here ===============
@@ -185,7 +185,7 @@ const Contact = () => {
       };
   
       try {
-        const response = await fetch("https://natsteelweb.onrender.com/Contact", {
+        const response = await fetch("http://localhost:3001/Contact", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

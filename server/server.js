@@ -118,7 +118,7 @@ app.post(
     // กำหนดข้อความอีเมล
     const mailOptions = {
       //   from: "s6404062630465@email.kmutnb.ac.th",
-      from: `คุณ ${clientName} <${email}>`,
+      from: `${clientName} <${email}>`,
       replyTo: `คุณ ${clientName} <${email}>`,
       to: "panwasalimsuwan@gmail.com",
       subject: "ติดต่อสอบถาม",
@@ -220,7 +220,7 @@ app.post(
     // กำหนดข้อความอีเมล
     const mailOptions = {
       //   from: "s6404062630465@email.kmutnb.ac.th",
-      from: `คุณ ${clientName} <${email}>`,
+      from: `${clientName} <${email}>`,
       replyTo: `คุณ ${clientName} <${email}>`,
       to: "panwasalimsuwan@gmail.com",
       subject: "ขอใบเสนอราคา",
@@ -380,6 +380,12 @@ app.use("/", (req,res) => {
   res.send("Server is running!");
 });
 
-app.listen(3001, () => {
-  console.log("Server running on port 3001");
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
+// app.listen(3001, () => {
+//   console.log("Server running on port 3001");
+// });
