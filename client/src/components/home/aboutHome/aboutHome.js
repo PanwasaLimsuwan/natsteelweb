@@ -28,7 +28,7 @@ const aboutHome = () => {
     justifyContent: "center",
     gap: "10px", // เพิ่ม gap ระหว่างไอคอน
     flexWrap: "wrap", // Allow wrapping if needed
-    maxWidth: "800px", // Maximum width to keep icons in a single row on larger screens
+    maxWidth: "700px", // Maximum width to keep icons in a single row on larger screens
     margin: "0 auto", // Center align and add margins as needed
     };
 

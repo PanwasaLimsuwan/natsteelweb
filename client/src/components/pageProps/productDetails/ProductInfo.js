@@ -357,7 +357,7 @@ const ProductInfo = ({ productInfo }) => {
             <span className="flex justify-center items-center h-full">
               <div ref={imageRef}>
                 <Image
-                  className="w-40 mb-0 md:mb-10 md:mt-10 mr-48 self-center"
+                  className="w-40 md:w-80 md:mb-10 md:mt-10 mr-24 md:mr-16 self-center"
                   imgSrc={productInfo.img}
                 />
               </div>

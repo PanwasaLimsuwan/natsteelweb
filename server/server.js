@@ -90,6 +90,19 @@ import expressAsyncHandler from "express-async-handler";
 app.use(express.json()); // middleware เพื่อ parse ข้อมูล JSON ที่ส่งมากับ request
 app.use(cors());
 
+const transporter = nodemailer.createTransport({
+  // service: "gmail",
+  host: "smtp.gmail.com", // เปลี่ยนเป็น SMTP server ของคุณ
+  port: 587, // ปรับให้เป็น port ของ SMTP server ของคุณ (เช่น 587 หรือ 465)
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: "s6404062630465@email.kmutnb.ac.th",
+    pass: "jdupbxgytqiyzcon",
+  },
+  tls: {
+    rejectUnauthorized: false  },
+});
+
 app.post(
   "/contact",
   expressAsyncHandler(async (req, res) => {
@@ -99,22 +112,13 @@ app.post(
       tel,
       messages,
     } = req.body;
-    
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "s6404062630465@email.kmutnb.ac.th",
-        pass: "jdupbxgytqiyzcon",
-      },
-      tls: {
-        rejectUnauthorized: false, // ปิดการตรวจสอบใบรับรอง
-      },
-    });
+
+    // const senderEmail = {email};
 
     // กำหนดข้อความอีเมล
     const mailOptions = {
       //   from: "s6404062630465@email.kmutnb.ac.th",
-      from: `คุณ ${clientName} ${email}`,
+      from: `คุณ ${clientName} <${email}>`,
       replyTo: `คุณ ${clientName} <${email}>`,
       to: "panwasalimsuwan@gmail.com",
       subject: "ติดต่อสอบถาม",
@@ -132,17 +136,17 @@ app.post(
     try {
       // ส่งอีเมล
       const info = await transporter.sendMail(mailOptions);
-      console.log("Email sent:", info.response);
+      // console.log("Email sent:", info.response);
       // console.log(products);
       // res.status(200).send("Email sent successfully");
       // ส่งคำตอบกลับไปยังแอปพลิเคชันฝั่งไคลเอนต์
       res
         .status(200)
-        .json({ success: true, message: "Email sent successfully" });
+        .json({ success: true, message: "ส่งอีเมลสําเร็จ" });
     } catch (error) {
-      console.error("Error sending email:", error);
+      // console.error("Error sending email:", error);
       // res.status(500).send("Error sending email");
-      res.status(500).json({ success: false, message: "Error sending email" });
+      res.status(500).json({ success: false, message: "เกิดข้อผิดพลาด" });
     }
   })
 );
@@ -357,17 +361,17 @@ app.post(
     try {
       // ส่งอีเมล
       const info = await transporter.sendMail(mailOptions);
-      console.log("Email sent:", info.response);
+      // console.log("Email sent:", info.response);
       // console.log(products);
       // res.status(200).send("Email sent successfully");
       // ส่งคำตอบกลับไปยังแอปพลิเคชันฝั่งไคลเอนต์
       res
         .status(200)
-        .json({ success: true, message: "Email sent successfully" });
+        .json({ success: true, message: "ส่งอีเมลสําเร็จ" });
     } catch (error) {
-      console.error("Error sending email:", error);
+      // console.error("Error sending email:", error);
       // res.status(500).send("Error sending email");
-      res.status(500).json({ success: false, message: "Error sending email" });
+      res.status(500).json({ success: false, message: "เกิดข้อผิดพลาด" });
     }
   })
 );

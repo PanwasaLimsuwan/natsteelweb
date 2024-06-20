@@ -108,6 +108,7 @@ const Quotation = (item) => {
   }, [location]);
 
   const [clientName, setclientName] = useState("");
+  const [taxpayerId, setTaxpayerId] = useState("");
   const [email, setEmail] = useState("");
   const [messages, setMessages] = useState("");
   const [tel, setTel] = useState("");
@@ -122,6 +123,7 @@ const Quotation = (item) => {
 
   // ========== Error Messages Start here ============
   const [errClientName, setErrClientName] = useState("");
+  const [errTaxpayerId, setErrTaxpayerId] = useState("");
   const [errEmail, setErrEmail] = useState("");
   const [errTel, setErrTel] = useState("");
   const [errMobile, setErrMobile] = useState("");
@@ -137,6 +139,10 @@ const Quotation = (item) => {
   const handleName = (e) => {
     setclientName(e.target.value);
     setErrClientName("");
+  };
+  const handleTaxpayerId = (e) => {
+    setTaxpayerId(e.target.value);
+    setErrTaxpayerId("");
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -181,11 +187,22 @@ const Quotation = (item) => {
   // };
 
   // ================= Email Validation start here =============
-  // const ClientNameValidation = (clientName) => {
-  //   return String(clientName)
-  //     .toLowerCase()
-  //     .match(/^[A-Za-zก-๙]+$/);
-  // };
+
+  const ClientNameValidation = (clientName) => {
+    return (
+      String(clientName)
+        .toLowerCase()
+        // .match(/^[A-Za-zก-๙]+$/);
+        .match(/^([A-Za-zก-๙]+(?:\s+[A-Za-zก-๙]+)+)$/)
+    );
+    // .match(/^[^\s]+( [\u0E00-\u0E7FA-Za-z]+)*$/);
+  };
+
+  const TaxpayerIdValidation = (taxpayerId) => {
+    return String(taxpayerId)
+      .toLowerCase()
+      .match(/^[0-9]{13}$/);
+  };
 
   const EmailValidation = (email) => {
     return String(email)
@@ -230,11 +247,17 @@ const Quotation = (item) => {
     if (!clientName) {
       setErrClientName("กรุณากรอกชื่อ-นามสกุล");
       let isValid = true;
+    } else if (!ClientNameValidation(clientName)) {
+      setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
+      isValid = true;
     }
-    //  else if (!ClientNameValidation(clientName)) {
-    //   setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
-    //   isValid = true;
-    // }
+    if (!taxpayerId) {
+      setErrTaxpayerId("กรุณากรอกเลขประจําตัวผู้เสียภาษี");
+      isValid = true;
+    } else if (!TaxpayerIdValidation(taxpayerId)) {
+      setErrTaxpayerId("กรุณากรอกเลขประจําตัวผู้เสียภาษีให้ถูกต้อง");
+      isValid = true;
+    }
     if (!email) {
       setErrEmail("กรุณากรอกอีเมล");
       isValid = true;
@@ -313,14 +336,17 @@ const Quotation = (item) => {
         })),
       };
       try {
-        const response = await fetch("http://localhost:3001/Quotation", {
-          // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await fetch(
+          "https://natsteelweb.onrender.com/Quotation",
+          {
+            // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
         if (!response.ok) {
           throw new Error("เครือข่ายไม่ตอบสนอง");
         }
@@ -404,6 +430,26 @@ const Quotation = (item) => {
                       !
                     </span>
                     {errClientName}
+                  </p>
+                )}
+              </div>
+              <div>
+                <p className="kanit-medium px-2">เลขประจำตัวผู้เสียภาษี</p>
+                <input
+                  name="name"
+                  onChange={handleTaxpayerId}
+                  value={taxpayerId}
+                  maxLength={13}
+                  className="w-full py-1 border-b-2 px-2 text-[#ff9800] placeholder:font-normal placeholder:text-sm outline-none focus-within:border-[#ff9800]"
+                  type="text"
+                  placeholder="กรุณากรอกเลขประจำตัวผู้เสียภาษี"
+                />
+                {errTaxpayerId && (
+                  <p className="text-red-500 text-sm kanit-medium mt-1 px-2 flex items-center gap-1">
+                    <span className="kanit-medium text-sm italic font-bold">
+                      !
+                    </span>
+                    {errTaxpayerId}
                   </p>
                 )}
               </div>
