@@ -73,19 +73,18 @@
 
 // module.exports = app;
 
-// const express = require("express");
-// const cors = require("cors");
-// const app = express();
-// const nodemailer = require("nodemailer");
-// const expressAsyncHandler = require("express-async-handler");
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const nodemailer = require("nodemailer");
+const expressAsyncHandler = require("express-async-handler");
 // const { default: Product } = require("../client/src/components/home/Products/Product");
 
-import express from "express";
-import cors from "cors";
-const app = express();
-import nodemailer from "nodemailer";
-import expressAsyncHandler from "express-async-handler";
-// import Product from "../client/src/components/home/Products/Product";
+// import express from "express";
+// import cors from "cors";
+// const app = express();
+// import nodemailer from "nodemailer";
+// import expressAsyncHandler from "express-async-handler";
 
 app.use(express.json()); // middleware เพื่อ parse ข้อมูล JSON ที่ส่งมากับ request
 app.use(cors());
