@@ -187,7 +187,8 @@ const Contact = () => {
       try {
         const response = await fetch(
           // "https://natsteelweb.onrender.com/Contact", 
-          "https://natsteelweb.vercel.app/Contact", //
+          // "https://natsteelweb.vercel.app/Contact", 
+          "https://natsteelweb.vercel.app/api/Contact",
           {
           method: "POST",
           headers: {
