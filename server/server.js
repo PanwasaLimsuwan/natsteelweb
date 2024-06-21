@@ -207,18 +207,6 @@ app.post(
     //     messages
     //   );
 
-    // สร้าง transporter สำหรับส่งอีเมล
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "s6404062630465@email.kmutnb.ac.th",
-        pass: "jdupbxgytqiyzcon",
-      },
-      tls: {
-        rejectUnauthorized: false, // ปิดการตรวจสอบใบรับรอง
-      },
-    });
-
     // กำหนดข้อความอีเมล
     const mailOptions = {
       //   from: "s6404062630465@email.kmutnb.ac.th",
