@@ -246,7 +246,7 @@ const Quotation = (item) => {
     // ตรวจสอบข้อมูลที่กรอกในแต่ละฟิลด์
     if (!clientName) {
       setErrClientName("กรุณากรอกชื่อ-นามสกุล");
-      let isValid = true;
+      isValid = true;
     } else if (!ClientNameValidation(clientName)) {
       setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
       isValid = true;
@@ -310,6 +310,7 @@ const Quotation = (item) => {
       // ส่งข้อมูล
       const formData = {
         clientName,
+        taxpayerId,
         email,
         tel,
         mobile,
@@ -351,10 +352,11 @@ const Quotation = (item) => {
           throw new Error("เครือข่ายไม่ตอบสนอง");
         }
         const data = await response.json();
-        alert("ส่งคำใบคำร้องสําเร็จ");
+        alert("ส่งข้อมูลสําเร็จ");
         // Reset the form and cart after successful submission
         dispatch(resetCart());
         setclientName("");
+        setTaxpayerId("");
         setEmail("");
         setTel("");
         setMobile("");

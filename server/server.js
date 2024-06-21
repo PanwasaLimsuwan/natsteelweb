@@ -156,6 +156,7 @@ app.post(
   expressAsyncHandler(async (req, res) => {
     const {
       clientName,
+      taxpayerId,
       email,
       tel,
       mobile,
@@ -163,22 +164,24 @@ app.post(
       company,
       province,
       branch,
+      Address,
       messages,
       productsData,
     } = req.body;
 
-    console.log(
-      clientName,
-      email,
-      tel,
-      mobile,
-      fax,
-      company,
-      province,
-      branch,
-      messages,
-      productsData
-    );
+    // console.log(
+    //   clientName,
+    //   taxpayerId,
+    //   email,
+    //   tel,
+    //   mobile,
+    //   fax,
+    //   company,
+    //   province,
+    //   branch,
+    //   messages,
+    //   productsData
+    // );
     // const fromData = req.body;
     // console.log("Roger that! : ", fromData);
     // app.post("/sendEmail", async (req, res) => {
@@ -347,13 +350,15 @@ app.post(
           .join("\n") +
         `
         ชื่อ-นามสกุล: ${clientName}
+        เลขประจำตัวผู้เสียภาษี: ${taxpayerId}
         Email: ${email}
         เบอร์ติดต่อ: ${tel}
         เบอร์มือถือ: ${mobile}
         Fax: ${fax}
         หน่วยงาน: ${company}
-        จังหวัด: ${province}
         สาขา: ${branch}
+        จังหวัด: ${province}
+        ที่อยู่: ${Address}
         หมายเหตุ: ${messages}
     `,
     };
