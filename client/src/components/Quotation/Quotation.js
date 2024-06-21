@@ -360,7 +360,8 @@ const Quotation = (item) => {
         const response = await fetch(
           // "https://natsteelweb.onrender.com/Quotation",
           // "https://natsteelweb.vercel.app/Quotation",
-          "https://natsteelweb.vercel.app/api/Quotation",
+          // "https://natsteelweb.vercel.app/api/Quotation",
+          "https://natsteelweb-j8lqfgtxm-panwasa-limsuwans-projects.vercel.app/Quotation"
           {
             // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
             method: "POST",
