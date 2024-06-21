@@ -73,7 +73,7 @@
 
 // module.exports = app;
 
-const functions = require('firebase-functions');
+// const functions = require('firebase-functions');
 const express = require("express");
 const cors = require("cors");
 const app = express();

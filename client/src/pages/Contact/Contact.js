@@ -31,8 +31,9 @@ const Contact = () => {
   const [errEmail, setErrEmail] = useState("");
   const [errTel, setErrTel] = useState("");
   const [errMessages, setErrMessages] = useState("");
-  // ========== Error Messages End here ==============
   const [successMsg, setSuccessMsg] = useState("");
+    // ========== Error Messages End here ==============
+
 
   const handleName = (e) => {
     setclientName(e.target.value);
