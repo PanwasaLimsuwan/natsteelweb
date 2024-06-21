@@ -90,11 +90,11 @@ const expressAsyncHandler = require("express-async-handler");
 app.use(express.json()); // middleware เพื่อ parse ข้อมูล JSON ที่ส่งมากับ request
 app.use(cors());
 
-app.use(cors({
-  origin: 'https://natsteelweb-git-main-panwasa-limsuwans-projects.vercel.app', // หรือ '*' สำหรับการอนุญาตทุกโดเมน
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
-}));
+// app.use(cors({
+//   origin: 'https://natsteelweb-git-main-panwasa-limsuwans-projects.vercel.app', // หรือ '*' สำหรับการอนุญาตทุกโดเมน
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type'],
+// }));
 
 const transporter = nodemailer.createTransport({
   // service: "gmail",
@@ -102,8 +102,8 @@ const transporter = nodemailer.createTransport({
   port: 587, // ปรับให้เป็น port ของ SMTP server ของคุณ (เช่น 587 หรือ 465)
   secure: false, // true for 465, false for other ports
   auth: {
-    user: "s6404062630465@email.kmutnb.ac.th",
-    pass: "jdupbxgytqiyzcon",
+    user: "natsteelweb@gmail.com",
+    pass: "sceqhgjjtyrwcodf",
   },
   tls: {
     rejectUnauthorized: false  },

@@ -190,6 +190,8 @@ const Contact = () => {
           // "https://natsteelweb.onrender.com/Contact", 
           // "https://natsteelweb.vercel.app/Contact", 
           "https://natsteelweb.vercel.app/api/Contact",
+          // "http://localhost:3001/Contact",
+          // "https://natsteelweb-j8lqfgtxm-panwasa-limsuwans-projects.vercel.app/Contact",
           {
           method: "POST",
           headers: {
