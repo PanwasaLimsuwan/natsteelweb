@@ -341,7 +341,6 @@ app.post(
         เลขประจำตัวผู้เสียภาษี: ${taxpayerId}
         Email: ${email}
         เบอร์ติดต่อ: ${tel}
-        // เบอร์มือถือ: ${mobile}
         Fax: ${fax}
         หน่วยงาน: ${company}
         สาขา: ${branch}
