@@ -185,7 +185,10 @@ const Contact = () => {
       };
   
       try {
-        const response = await fetch("https://natsteelweb.onrender.com/Contact", {
+        const response = await fetch(
+          // "https://natsteelweb.onrender.com/Contact", 
+          "https://natsteelweb.vercel.app/Contact", //
+          {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
