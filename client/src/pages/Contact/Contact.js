@@ -185,7 +185,7 @@ const Contact = () => {
       };
   
       try {
-        const response = await fetch("http://localhost:3001/Contact", {
+        const response = await fetch("https://natsteelweb.onrender.com/Contact", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

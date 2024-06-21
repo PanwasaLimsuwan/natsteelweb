@@ -338,7 +338,7 @@ const Quotation = (item) => {
       };
       try {
         const response = await fetch(
-          "http://localhost:3001/Quotation",
+          "https://natsteelweb.onrender.com/Quotation",
           {
             // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
             method: "POST",
