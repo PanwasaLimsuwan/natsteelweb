@@ -118,6 +118,7 @@ const Quotation = (item) => {
   const [province, setProvince] = useState("");
   const [branch, setBranch] = useState("");
   const [Address, setAddress] = useState("");
+  const [postalCode, setpostalCode] = useState("");
   const [productsData, setProductsData] = useState([]);
   // const formRef = useRef(null);
 
@@ -132,6 +133,7 @@ const Quotation = (item) => {
   const [errProvince, setErrProvince] = useState("");
   const [errBranch, setErrBranch] = useState("");
   const [errAddress, setErrAddress] = useState("");
+  const [errpostalCode, setErrpostalCode] = useState("");
   // const [errMessages, setErrMessages] = useState("");
   // ========== Error Messages End here ==============
   const [successMsg, setSuccessMsg] = useState("");
@@ -176,6 +178,10 @@ const Quotation = (item) => {
     setProvince(e.target.value);
     setErrProvince("");
   };
+  const handlepostalCode = (e) => {
+    setpostalCode(e.target.value);
+    setErrpostalCode("");
+  }
   const handleMessages = (e) => {
     setMessages(e.target.value);
     // setErrMessages("");
@@ -234,6 +240,12 @@ const Quotation = (item) => {
       .match(/[0-9-]{1,20}$/);
   };
 
+  const postalCodeValidation = (postalCode) => {
+    return String(postalCode)
+      .toLowerCase()
+      .match(/^[0-9]{5}$/);
+  };
+
   const handlePost = async (e) => {
     let isValid = false;
     e.preventDefault(); // Prevent form submission
@@ -266,19 +278,19 @@ const Quotation = (item) => {
       isValid = true;
     }
     if (!tel) {
-      setErrTel("กรุณากรอกเบอร์โทรศัพท์");
+      setErrTel("กรุณากรอกเบอร์ติดต่อ");
       isValid = true;
     } else if (!TelValidation(tel)) {
-      setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+      setErrTel("กรุณากรอกเบอร์ติดต่อให้ถูกต้อง");
       isValid = true;
     }
-    if (!mobile) {
-      setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือ");
-      isValid = true;
-    } else if (!MobileValidation(mobile)) {
-      setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง");
-      isValid = true;
-    }
+    // if (!mobile) {
+    //   setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือ");
+    //   isValid = true;
+    // } else if (!MobileValidation(mobile)) {
+    //   setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง");
+    //   isValid = true;
+    // }
     // if (!fax) {
     //   setErrFax("กรุณากรอกหมายเลขแฟกซ์");
     //   isValid = true;
@@ -306,6 +318,13 @@ const Quotation = (item) => {
       setErrAddress("กรุณากรอกที่อยู่");
       isValid = true;
     }
+    if (!postalCode) {
+      setErrpostalCode("กรุณากรอกรหัสไปรษณีย์");
+      isValid = true;
+    } else if (!postalCodeValidation(postalCode)) {
+      setErrpostalCode("กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง");
+      isValid = true;
+    }
     if (!isValid) {
       // ส่งข้อมูล
       const formData = {
@@ -313,12 +332,13 @@ const Quotation = (item) => {
         taxpayerId,
         email,
         tel,
-        mobile,
+        // mobile,
         fax,
         company,
         branch,
         province,
         Address,
+        postalCode,
         messages,
         productsData: products.map((item) => ({
           productName: item.name,
@@ -359,7 +379,7 @@ const Quotation = (item) => {
         setTaxpayerId("");
         setEmail("");
         setTel("");
-        setMobile("");
+        // setMobile("");
         setFax("");
         setCompany("");
         setBranch("");
@@ -495,7 +515,7 @@ const Quotation = (item) => {
                   </p>
                 )}
               </div>
-              <div>
+              {/* <div>
                 <p className="kanit-medium px-2">เบอร์โทรศัพท์มือถือ</p>
                 <input
                   name="Mobile"
@@ -514,7 +534,7 @@ const Quotation = (item) => {
                     {errMobile}
                   </p>
                 )}
-              </div>
+              </div> */}
               <div>
                 <p className="kanit-medium px-2">FAX</p>
                 <input
@@ -612,6 +632,26 @@ const Quotation = (item) => {
                       !
                     </span>
                     {errProvince}
+                  </p>
+                )}
+              </div>
+              <div>
+                <p className="kanit-medium px-2">รหัสไปรษณีย์</p>
+                <input
+                  name="postalCode"
+                  onChange={handlepostalCode}
+                  value={postalCode}
+                  maxLength={5}
+                  className="w-full py-1 border-b-2 px-2 text-[#ff9800] placeholder:font-normal placeholder:text-sm outline-none focus-within:border-[#ff9800]"
+                  type="text"
+                  placeholder="กรุณากรอกรหัสไปรษณีย์"
+                />
+                {errpostalCode && (
+                  <p className="text-red-500 text-sm kanit-medium mt-1 px-2 flex items-center gap-1">
+                    <span className="kanit-medium text-sm italic font-bold">
+                      !
+                    </span>
+                    {errpostalCode}
                   </p>
                 )}
               </div>

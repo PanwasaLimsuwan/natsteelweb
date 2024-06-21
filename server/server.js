@@ -158,12 +158,13 @@ app.post(
       taxpayerId,
       email,
       tel,
-      mobile,
+      // mobile,
       fax,
       company,
       province,
       branch,
       Address,
+      postalCode,
       messages,
       productsData,
     } = req.body;
@@ -261,7 +262,7 @@ app.post(
           หน่วย: ${product.Unit}
           วิธีการจัดส่ง: ${product.delivery}
         `;
-      } else if (product.productName === "ปลอกเสา-ปลอกคาน") {
+      } else if (product.productName === "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)") {
         return `
           สินค้าชิ้นที่: ${index + 1}
           ชื่อสินค้า: ${product.productName}
@@ -271,7 +272,7 @@ app.post(
           หน่วย: ${product.Unit}
           วิธีการจัดส่ง: ${product.delivery}
         `;
-      } else if (product.productName === "ปลอกสามเหลี่ยม") {
+      } else if (product.productName === "ปลอกสามเหลี่ยม (วัตถุดิบ มอก.)") {
         return `
           สินค้าชิ้นที่: ${index + 1}
           ชื่อสินค้า: ${product.productName}
@@ -280,7 +281,7 @@ app.post(
           หน่วย: ${product.Unit}
           วิธีการจัดส่ง: ${product.delivery}
         `;
-      } else if (product.productName === "ปลอกสี่เหลี่ยม") {
+      } else if (product.productName === "ปลอกสี่เหลี่ยม (วัตถุดิบ มอก.)") {
         return `
           สินค้าชิ้นที่: ${index + 1}
           ชื่อสินค้า: ${product.productName}
@@ -340,12 +341,13 @@ app.post(
         เลขประจำตัวผู้เสียภาษี: ${taxpayerId}
         Email: ${email}
         เบอร์ติดต่อ: ${tel}
-        เบอร์มือถือ: ${mobile}
+        // เบอร์มือถือ: ${mobile}
         Fax: ${fax}
         หน่วยงาน: ${company}
         สาขา: ${branch}
-        จังหวัด: ${province}
         ที่อยู่: ${Address}
+        จังหวัด: ${province}
+        รหัสไปรษณีย์: ${postalCode}
         หมายเหตุ: ${messages}
     `,
     };
