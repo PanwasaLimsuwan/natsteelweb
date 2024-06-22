@@ -7,11 +7,6 @@ const Contact = () => {
   const location = useLocation();
   const [prevLocation, setPrevLocation] = useState("");
   const formRef = useRef(null);
-
-  // useEffect(() => {
-  //   setPrevLocation(location.state.data);
-  // }, [location]);
-
   useEffect(() => {
     if (location.state) {
       setPrevLocation(location.state.data);
@@ -24,16 +19,11 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [messages, setMessages] = useState("");
   const [tel, setTel] = useState("");
-  // const formRef = useRef(null);
-
-  // ========== Error Messages Start here ============
   const [errClientName, setErrClientName] = useState("");
   const [errEmail, setErrEmail] = useState("");
   const [errTel, setErrTel] = useState("");
   const [errMessages, setErrMessages] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-    // ========== Error Messages End here ==============
-
 
   const handleName = (e) => {
     setclientName(e.target.value);
@@ -58,10 +48,8 @@ const Contact = () => {
     return (
       String(clientName)
         .toLowerCase()
-        // .match(/^[A-Za-zก-๙]+$/);
         .match(/^([A-Za-zก-๙]+(?:\s+[A-Za-zก-๙]+)+)$/)
     );
-    // .match(/^[^\s]+( [\u0E00-\u0E7FA-Za-z]+)*$/);
   };
 
   const EmailValidation = (email) => {
@@ -74,77 +62,10 @@ const Contact = () => {
     return (
       String(tel)
         .toLowerCase()
-        // .match(/^[0][0-9]{2}[-\s]?[0-9]{3}[-\s]?[0-9]{4}$/);
         .match(/^0[0-9]{9}$/)
     );
   };
   // ================= Email Validation End here ===============
-
-  // const handlePost = (e) => {
-  //   e.preventDefault();
-  //   if (!clientName) {
-  //     setErrClientName("กรุณากรอกชื่อ-นามสกุล");
-  //   }
-  //   // else {
-  //   //   if (!ClientNameValidation(clientName)) {
-  //   //     setErrClientName("กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง");
-  //   //   }
-  //   // }
-  //   if (!email) {
-  //     setErrEmail("กรุณากรอกอีเมล");
-  //   } else {
-  //     if (!EmailValidation(email)) {
-  //       setErrEmail("กรุณากรอกอีเมลให้ถูกต้อง");
-  //     }
-  //   }
-  //   if (!tel) {
-  //     setErrTel("กรุณากรอกเบอร์โทรศัพท์");
-  //   } else {
-  //     if (!TelValidation(tel)) {
-  //       setErrTel("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
-  //     }
-  //   }
-  //   if (!messages) {
-  //     setErrMessages("กรุณากรอกข้อความ");
-  //   }
-
-  //   if (
-  //     clientName &&
-  //     email &&
-  //     EmailValidation(email) &&
-  //     tel &&
-  //     TelValidation(tel) &&
-  //     messages
-  //   ) {
-  //     const formData = {
-  //       clientName,
-  //       email,
-  //       tel,
-  //       messages,
-  //     };
-
-  //     fetch("http://localhost:3001/Contact", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("Success:", data);
-  //         alert("ส่งข้อมูลสําเร็จ");
-  //         // Reset the form and cart after successful submission
-  //         setclientName("");
-  //         setEmail("");
-  //         setTel("");
-  //         setMessages("");
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error:", error);
-  //       });
-  //   }
-  // };
 
   const handlePost = async (e) => {
     e.preventDefault();
@@ -187,11 +108,8 @@ const Contact = () => {
   
       try {
         const response = await fetch(
-          // "https://natsteelweb.onrender.com/Contact", 
-          // "https://natsteelweb.vercel.app/Contact", 
-          "https://natsteelweb.vercel.app/api/Contact",
           // "http://localhost:3001/Contact",
-          // "https://natsteelweb-j8lqfgtxm-panwasa-limsuwans-projects.vercel.app/Contact",
+          "https://natsteelweb.onrender.com/Contact",
           {
           method: "POST",
           headers: {
@@ -207,8 +125,6 @@ const Contact = () => {
         const data = await response.json();
         console.log("Success:", data);
         alert("ส่งข้อมูลสําเร็จ");
-  
-        // Reset the form and clear the state after successful submission
         setclientName("");
         setEmail("");
         setTel("");
@@ -331,15 +247,13 @@ const Contact = () => {
         </p>
         <iframe
           src="https://www.google.com/maps/embed/v1/place?q=บริษัท+นัท+สตีล+จำกัด+ตำบล+พงตึก+อำเภอท่ามะกา+กาญจนบุรี+ประเทศไทย&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
-          // width="650"
-          // height="350"
           className="w-full md:w-[650px] h-64 md:h-[350px]"
           title="Google maps Footer"
           loading="lazy"
           allowFullScreen
         ></iframe>
-        <div className="text-center" target="_blank">
-          <a href="https://maps.app.goo.gl/7a94sQmJc9e4uD9e7">
+        <div className="text-center">
+          <a href="https://maps.app.goo.gl/7a94sQmJc9e4uD9e7" target="_blank">
             <button className="w-20 h-9 kanit-medium bg-white border-2 border-[#154360] text-[#154360] rounded-2xl mt-7 hover:text-[#ff9800] hover:border-[#ff9800] duration-300">
               นำทาง
             </button>

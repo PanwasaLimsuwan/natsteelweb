@@ -48,7 +48,10 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <a href="https://maps.app.goo.gl/7a94sQmJc9e4uD9e7">
+          <a
+            href="https://maps.app.goo.gl/7a94sQmJc9e4uD9e7"
+            target="_blank" // เพื่อให้เปิดลิงก์ในหน้าต่างใหม่
+          >
             <div className="flex justify-center">
               <p className="kanit-medium text-white text-center hover:text-[#ff9800]">
                 <span className="kanit-semibold">ที่อยู่ :</span> เลขที่ 11/5

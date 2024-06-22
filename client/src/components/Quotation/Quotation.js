@@ -15,10 +15,6 @@ const Quotation = (item) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.orebiReducer.products);
-  // const [totalQuantity, setTotalQuantity] = useState("");
-  // const [totalAmt, setTotalAmt] = useState("");
-  // const [shippingCharge, setShippingCharge] = useState("");
-
   const provinces = [
     "กระบี่",
     "กรุงเทพมหานคร",
@@ -184,13 +180,7 @@ const Quotation = (item) => {
   }
   const handleMessages = (e) => {
     setMessages(e.target.value);
-    // setErrMessages("");
   };
-
-  // const handleNavigate = () => {
-  //   // navigate("/quotation", { number: Number, unit: Unit });
-  //   navigate("/quotation", { state: { Number, Unit } });
-  // };
 
   // ================= Email Validation start here =============
 
@@ -220,7 +210,6 @@ const Quotation = (item) => {
     return (
       String(tel)
         .toLowerCase()
-        // .match(/^[0][0-9]{2}[-\s]?[0-9]{3}[-\s]?[0-9]{4}$/);
         .match(/^0[0-9]{9}$/)
     );
   };
@@ -229,7 +218,6 @@ const Quotation = (item) => {
     return (
       String(mobile)
         .toLowerCase()
-        // .match(/^[0][0-9]{2}[-\s]?[0-9]{3}[-\s]?[0-9]{4}$/);
         .match(/^0[0-9]{9}$/)
     );
   };
@@ -284,20 +272,6 @@ const Quotation = (item) => {
       setErrTel("กรุณากรอกเบอร์ติดต่อให้ถูกต้อง");
       isValid = true;
     }
-    // if (!mobile) {
-    //   setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือ");
-    //   isValid = true;
-    // } else if (!MobileValidation(mobile)) {
-    //   setErrMobile("กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง");
-    //   isValid = true;
-    // }
-    // if (!fax) {
-    //   setErrFax("กรุณากรอกหมายเลขแฟกซ์");
-    //   isValid = true;
-    // } else if (!FaxValidation(fax)) {
-    //   setErrFax("กรุณากรอกหมายเลขแฟกซ์ให้ถูกต้อง");
-    //   isValid = true;
-    // }
     if (!FaxValidation) {
       setErrFax("กรุณากรอกหมายเลขแฟกซ์ให้ถูกต้อง");
       isValid = true;
@@ -353,18 +327,13 @@ const Quotation = (item) => {
           gauge: item.gauge,
           delivery: item.delivery,
           ProductType: item.ProductType,
-          // ProductType: item.ProductType,
         })),
       };
       try {
         const response = await fetch(
-          // "https://natsteelweb.onrender.com/Quotation",
-          // "https://natsteelweb.vercel.app/Quotation",
-          "https://natsteelweb.vercel.app/api/Quotation",
-          // "https://natsteelweb-j8lqfgtxm-panwasa-limsuwans-projects.vercel.app/Quotation",
           // "http://localhost:3001/Quotation",
+          "https://natsteelweb.onrender.com/Quotation",
           {
-            // Replace 'YOUR_API_ENDPOINT' with your actual endpoint URL
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -377,7 +346,6 @@ const Quotation = (item) => {
         }
         const data = await response.json();
         alert("ส่งข้อมูลสําเร็จ");
-        // Reset the form and cart after successful submission
         dispatch(resetCart());
         setclientName("");
         setTaxpayerId("");
@@ -519,26 +487,6 @@ const Quotation = (item) => {
                   </p>
                 )}
               </div>
-              {/* <div>
-                <p className="kanit-medium px-2">เบอร์โทรศัพท์มือถือ</p>
-                <input
-                  name="Mobile"
-                  onChange={handleMobile}
-                  value={mobile}
-                  maxLength={10}
-                  className="w-full py-1 border-b-2 px-2 text-[#ff9800] placeholder:font-normal placeholder:text-sm outline-none focus-within:border-[#ff9800]"
-                  type="tel"
-                  placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                />
-                {errMobile && (
-                  <p className="text-red-500 text-sm kanit-medium mt-1 px-2 flex items-center gap-1">
-                    <span className="kanit-medium text-sm italic font-bold">
-                      !
-                    </span>
-                    {errMobile}
-                  </p>
-                )}
-              </div> */}
               <div>
                 <p className="kanit-medium px-2">FAX</p>
                 <input
@@ -712,7 +660,6 @@ const Quotation = (item) => {
                 </div>
               ))}
             </div>
-            {/* Render products by type */}
             <button
               onClick={() => dispatch(resetCart())}
               className="kanit-medium py-3 px-4 bg-red-500 rounded-xl text-white font-semibold uppercase mb-4 hover:bg-red-700 hover:text-[#E74C3C] duration-300"

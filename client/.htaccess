@@ -1,0 +1,20 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+Redirect 301 /page-6 http://www.natsteel.co.th/shop
+Redirect 301 /page-5 http://www.natsteel.co.th/
+Redirect 301 /page-4 http://www.natsteel.co.th/
+Redirect 301 /page-3 http://www.natsteel.co.th/
+Redirect 301 /page-2 http://www.natsteel.co.th/
+Redirect 301 /page-1 http://www.natsteel.co.th/
+Redirect 301 /read-7 http://www.natsteel.co.th/
+Redirect 301 /read-8 http://www.natsteel.co.th/
+Redirect 301 /read-9 http://www.natsteel.co.th/
+Redirect 301 /read-10 http://www.natsteel.co.th/
+Redirect 301 /read-11 http://www.natsteel.co.th/
+Redirect 301 /read-12 http://www.natsteel.co.th/
+Redirect 301 /home http://www.natsteel.co.th/
