@@ -111,7 +111,8 @@ const Contact = () => {
           // "http://localhost:3001/Contact",
           // "http://natsteel.co.th/Contact",
           // "https://natsteelweb.onrender.com/Contact",
-          "http://natsteel.co.th:3000/Contact",
+          // "http://natsteel.co.th:3000/Contact",
+          "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Contact",
           {
           method: "POST",
           headers: {

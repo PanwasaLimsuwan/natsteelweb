@@ -334,7 +334,8 @@ const Quotation = (item) => {
           // "http://localhost:3001/Quotation",
           // "http://natsteel.co.th/Quotation",
           // "https://natsteelweb.onrender.com/Quotation",
-          "http://natsteel.co.th:3000/Quotation",
+          // "http://natsteel.co.th:3000/Quotation",
+          "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Quotation",
           {
             method: "POST",
             headers: {
