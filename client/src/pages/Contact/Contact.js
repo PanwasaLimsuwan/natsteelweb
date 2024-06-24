@@ -109,7 +109,9 @@ const Contact = () => {
       try {
         const response = await fetch(
           // "http://localhost:3001/Contact",
-          "https://natsteelweb.onrender.com/Contact",
+          // "http://natsteel.co.th/Contact",
+          // "https://natsteelweb.onrender.com/Contact",
+          "http://natsteel.co.th:3000/Contact",
           {
           method: "POST",
           headers: {

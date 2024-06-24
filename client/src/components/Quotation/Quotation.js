@@ -332,7 +332,9 @@ const Quotation = (item) => {
       try {
         const response = await fetch(
           // "http://localhost:3001/Quotation",
-          "https://natsteelweb.onrender.com/Quotation",
+          // "http://natsteel.co.th/Quotation",
+          // "https://natsteelweb.onrender.com/Quotation",
+          "http://natsteel.co.th:3000/Quotation",
           {
             method: "POST",
             headers: {

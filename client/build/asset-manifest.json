@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9b32c5a1.css",
-    "main.js": "/static/js/main.7d233326.js",
+    "main.js": "/static/js/main.fa18ebbc.js",
     "static/media/ลวดหนาม2.png": "/static/media/ลวดหนาม2.4e172a84bfc31aa85be7.png",
     "static/media/เหล็กวงบ่อ.png": "/static/media/เหล็กวงบ่อ.9a9f12660dca45c3f6ac.png",
     "static/media/กรงไก่3.png": "/static/media/กรงไก่3.09fb8450d9503b5596c7.png",
@@ -38,10 +38,10 @@
     "static/media/qrcode.png": "/static/media/qrcode.b576f6d079a3b8291a72.png",
     "index.html": "/index.html",
     "main.9b32c5a1.css.map": "/static/css/main.9b32c5a1.css.map",
-    "main.7d233326.js.map": "/static/js/main.7d233326.js.map"
+    "main.fa18ebbc.js.map": "/static/js/main.fa18ebbc.js.map"
   },
   "entrypoints": [
     "static/css/main.9b32c5a1.css",
-    "static/js/main.7d233326.js"
+    "static/js/main.fa18ebbc.js"
   ]
 }
