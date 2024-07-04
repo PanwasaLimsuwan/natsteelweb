@@ -4,6 +4,8 @@ import Cat5 from "../../components/pageProps/shopPage/Cat5";
 // import ProductBanner from "../../components/pageProps/shopPage/ProductBanner";
 // import ShopSideNav from "../../components/pageProps/shopPage/ShopSideNav";
 // import Category from "../../components/pageProps/shopPage/shopBy/Category";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const C5 = () => {
   const [itemsPerPage] = useState(48);
@@ -25,6 +27,9 @@ const C5 = () => {
             {/* <Price /> */}
           </div>
         </div>
+        <Link to="/">
+          <FaArrowLeft className="text-[#154360] text-4xl mr-10 cursor-pointer hover:text-[#ff9800]" />
+        </Link>
         <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
           {/* <ProductBanner itemsPerPageFromBanner={itemsPerPageFromBanner} /> */}
           <Cat5 itemsPerPage={itemsPerPage} />

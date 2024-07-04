@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  ปลอกเสาปลอกคาน,
-  ลวดตาข่ายทอ,
+  ปลอกเสาปลอกคาน2,
+  ลวดตาข่ายทอ2,
   ลวดหนาม,
   ตะปู,
   กรงไก่,
@@ -18,13 +18,13 @@ import "../../../pages/About/About.css";
 const products = [
   {
     id: "1",
-    img: ปลอกเสาปลอกคาน,
+    img: ปลอกเสาปลอกคาน2,
     name: "เหล็กปลอกทุกชนิด Bender wire",
     link: "/category1",
   },
   {
     id: "2",
-    img: ลวดตาข่ายทอ,
+    img: ลวดตาข่ายทอ2,
     name: "ตาข่ายทอ chain link",
     link: "/category2",
   },

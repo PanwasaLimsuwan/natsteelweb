@@ -118,7 +118,7 @@ const aboutHome = () => {
             className="kanit-medium mt-2 small-text"
             style={{ fontSize: "0.8rem", textAlign: "center" }}
             >
-              ได้รับสินค้าคุณภาพดีในราคาเป็นกันเอง
+              ได้รับสินค้าคุณภาพดี <br />ในราคาเป็นกันเอง
             </p>
           </div>
           <div style={imageTextStyle}>

@@ -324,6 +324,7 @@ const Quotation = (item) => {
           nailsize: item.nailsize,
           coil: item.coil,
           customsize: item.customsize,
+          coilSize: item.coilSize,
           gauge: item.gauge,
           delivery: item.delivery,
           ProductType: item.ProductType,
@@ -333,9 +334,9 @@ const Quotation = (item) => {
         const response = await fetch(
           // "http://localhost:3001/Quotation",
           // "http://natsteel.co.th/Quotation",
-          // "https://natsteelweb.onrender.com/Quotation",
+          "https://natsteelweb.onrender.com/Quotation",
           // "http://natsteel.co.th:3000/Quotation",
-          "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Quotation",
+          // "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Quotation",
           {
             method: "POST",
             headers: {
@@ -386,8 +387,17 @@ const Quotation = (item) => {
                   item.name === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
                   item.name === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)"
                 ) {
-                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
+                  // const coilSize = item.coil === "ระบุค่าเอง" ? item.customsize : item.coil;
+                
+                  return `สินค้า : ${item.name} 
+                ขนาดลวด : ${item.wiresize} 
+                ตา : ${item.gauge} 
+                ขนาด(ต่อม้วน) : ${item.coil} 
+                จำนวน : ${item.Number} 
+                หน่วย : ${item.Unit} 
+                วิธีจัดส่ง : ${item.delivery}`;
+                }
+                else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
                   return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "ลวดหนาม") {
                   return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
@@ -405,6 +415,22 @@ const Quotation = (item) => {
                   return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "รั้วแรงดึง (ตาข่ายถักปม)") {
                   return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)") {
+                  return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ลวดชุบสังกะสี") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กวงบ่อ" || item.name === "เหล็กวงท่อ") {
+                  return `สินค้า : ${item.name} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ตะแกรงเหล็กฉีก") {
+                  return `สินค้า : ${item.name} ขนาด(ต่อแผ่น) : ${item.sheet} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กเพลทตัดสำเร็จ") {
+                  return `สินค้า : ${item.name} ขนาด(ต่อแผ่น) : ${item.sheet} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาดตกตะแกรง : ${item.gauge} ขนาด(ต่อม้วน) : ${item.wiremeshsize1}${item.wiremeshsize2} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "สังกะสีแผ่นเรียบ") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาด(ต่อม้วน) : ${item.coil}  จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กตัด หนวดกุ้ง") {
+                  
                 }
                 return null;
               })}
@@ -631,6 +657,9 @@ const Quotation = (item) => {
             >
               ส่งใบคำร้อง
             </button>
+            <p className="text-red-500 text-sm kanit-medium ml-10 md:ml-20 mt-5">
+                  * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาที หรือจนกว่าจะมีข้อความปรากฎ *
+                </p>
           </form>
         )}
       </div>

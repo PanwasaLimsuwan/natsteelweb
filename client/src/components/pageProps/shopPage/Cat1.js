@@ -3,6 +3,8 @@ import Product from "../../home/Products/Product";
 import { useSelector } from "react-redux";
 import { cat1 } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const items = cat1;
 
@@ -25,7 +27,7 @@ function Items({ currentItems, selectedBrands, selectedCategories }) {
     <>
       {filteredItems.map((item) => (
         <div
-        key={item._id}
+          key={item._id}
           onClick={() =>
             navigate(
               `/product/${item.productName.toLowerCase().split(" ").join("")}`,
@@ -63,6 +65,9 @@ const Cat1 = ({ itemsPerPage }) => {
   );
   return (
     <div>
+      {/* <Link to="/">
+          <FaArrowLeft className="text-[#154360] text-4xl mr-10 cursor-pointer hover:text-[#ff9800]" />
+        </Link> */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mdl:gap-4 lg:gap-10">
         <Items
           currentItems={currentItems}
@@ -70,8 +75,7 @@ const Cat1 = ({ itemsPerPage }) => {
           selectedCategories={selectedCategories}
         />
       </div>
-      <div className="flex flex-col mdl:flex-row justify-center mdl:justify-between items-center">
-      </div>
+      <div className="flex flex-col mdl:flex-row justify-center mdl:justify-between items-center"></div>
     </div>
   );
 };

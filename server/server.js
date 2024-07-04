@@ -341,12 +341,13 @@ const server = http.createServer((req, res) => {
                 product.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
                 product.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)"
               ) {
-                return `
+                const coilSize = product.coil === "ระบุค่าเอง" ? product.customsize : product.coil;
+              return `
                 สินค้าชิ้นที่: ${index + 1}
                 ชื่อสินค้า: ${product.productName}
                 ขนาดลวด: ${product.wiresize}
                 ตา: ${product.gauge}
-                ขนาด(ต่อม้วน): ${product.coil}
+                ขนาด(ต่อม้วน): ${coilSize}
                 จำนวน: ${product.Number}
                 หน่วย: ${product.Unit}
                 วิธีการจัดส่ง: ${product.delivery}
