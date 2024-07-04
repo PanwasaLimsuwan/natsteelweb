@@ -83,13 +83,15 @@ app.post(
       text:
   productsData
     .map((product, index) => {
-      if (product.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" || product.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)") {
+      if (product.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" || product.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)")
+        {
+          const coilSize = item.coil === "ระบุค่าเอง" ? item.customsize : item.coil;
         return `
           สินค้าชิ้นที่: ${index + 1}
           ชื่อสินค้า: ${product.productName}
           ขนาดลวด: ${product.wiresize}
           ตา: ${product.gauge} 
-          ขนาด(ต่อม้วน): ${product.coil}
+          ขนาด(ต่อม้วน): ${coilSize}
           จำนวน: ${product.Number}
           หน่วย: ${product.Unit}
           วิธีการจัดส่ง: ${product.delivery}
