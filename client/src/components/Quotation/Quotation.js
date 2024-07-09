@@ -15,6 +15,9 @@ const Quotation = (item) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.orebiReducer.products);
+
+  console.log(item.polesize);
+
   const provinces = [
     "กระบี่",
     "กรุงเทพมหานคร",
@@ -177,7 +180,7 @@ const Quotation = (item) => {
   const handlepostalCode = (e) => {
     setpostalCode(e.target.value);
     setErrpostalCode("");
-  }
+  };
   const handleMessages = (e) => {
     setMessages(e.target.value);
   };
@@ -207,19 +210,15 @@ const Quotation = (item) => {
   };
 
   const TelValidation = (tel) => {
-    return (
-      String(tel)
-        .toLowerCase()
-        .match(/^0[0-9]{9}$/)
-    );
+    return String(tel)
+      .toLowerCase()
+      .match(/^0[0-9]{9}$/);
   };
 
   const MobileValidation = (mobile) => {
-    return (
-      String(mobile)
-        .toLowerCase()
-        .match(/^0[0-9]{9}$/)
-    );
+    return String(mobile)
+      .toLowerCase()
+      .match(/^0[0-9]{9}$/);
   };
 
   const FaxValidation = (fax) => {
@@ -323,18 +322,38 @@ const Quotation = (item) => {
           clipsize: item.clipsize,
           nailsize: item.nailsize,
           coil: item.coil,
+          // coil: item.coil === "ระบุค่าเอง" ? item.customsize : item.coil, // ใช้ customsize ถ้า coil เป็น "ระบุค่าเอง"
           customsize: item.customsize,
-          coilSize: item.coilSize,
+          // customsize: item.customsize || "", // กำหนดค่า customsize
+          // coilSize: item.coilSize,
           gauge: item.gauge,
           delivery: item.delivery,
           ProductType: item.ProductType,
+
+          polesize: item.polesize,
+          stirrupssize: item.stirrupssize,
+          twohunsize: item.twohunsize,
+          wiremeshsize1: item.wiremeshsize1,
+          wiremeshsize2: item.wiremeshsize2,
+          dowelsize: item.dowelsize,
+          dowelsize2: item.dowelsize2,
+          sheet: item.sheet,
+          Panelheight: item.Panelheight,
+          Panelwidth: item.Panelwidth,
+          gabion1: item.gabion1,
+          gabion2: item.gabion2,
+          weight: item.weight,
         })),
       };
       try {
         const response = await fetch(
           // "http://localhost:3001/Quotation",
+          "https://natsteelweb-1.onrender.com/Quotation",
+          
+          // "http://localhost:3000/Quotation",
           // "http://natsteel.co.th/Quotation",
-          "https://natsteelweb.onrender.com/Quotation",
+          // "https://natsteelweb.onrender.com/Quotation",
+          // "https://natsteelweb-1.onrender.com/Quotation",
           // "http://natsteel.co.th:3000/Quotation",
           // "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Quotation",
           {
@@ -387,17 +406,17 @@ const Quotation = (item) => {
                   item.name === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
                   item.name === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)"
                 ) {
-                  // const coilSize = item.coil === "ระบุค่าเอง" ? item.customsize : item.coil;
-                
+                  const coilSize =
+                    item.coil === "ระบุค่าเอง" ? item.customsize : item.coil;
+
                   return `สินค้า : ${item.name} 
                 ขนาดลวด : ${item.wiresize} 
                 ตา : ${item.gauge} 
-                ขนาด(ต่อม้วน) : ${item.coil} 
+                ขนาด(ต่อม้วน) : ${coilSize} 
                 จำนวน : ${item.Number} 
                 หน่วย : ${item.Unit} 
                 วิธีจัดส่ง : ${item.delivery}`;
-                }
-                else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
+                } else if (item.name === "ตาข่ายสี่เหลี่ยม (กรงไก่)") {
                   return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาดลวด : ${item.wiresize} ตา : ${item.gauge} ขนาด(ต่อม้วน) : ${item.coil} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "ลวดหนาม") {
                   return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
@@ -419,18 +438,57 @@ const Quotation = (item) => {
                   return `สินค้า : ${item.name} น้ำหนัก(กิโลกรัม/ขด) : ${item.barbedsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "ลวดชุบสังกะสี") {
                   return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "เหล็กวงบ่อ" || item.name === "เหล็กวงท่อ") {
+                } else if (
+                  item.name === "เหล็กวงบ่อ" ||
+                  item.name === "เหล็กวงท่อ"
+                ) {
                   return `สินค้า : ${item.name} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "ตะแกรงเหล็กฉีก") {
                   return `สินค้า : ${item.name} ขนาด(ต่อแผ่น) : ${item.sheet} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "เหล็กเพลทตัดสำเร็จ") {
                   return `สินค้า : ${item.name} ขนาด(ต่อแผ่น) : ${item.sheet} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
-                } else if (item.name === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)") {
+                } else if (
+                  item.name === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)"
+                ) {
                   return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาดตกตะแกรง : ${item.gauge} ขนาด(ต่อม้วน) : ${item.wiremeshsize1}${item.wiremeshsize2} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "สังกะสีแผ่นเรียบ") {
-                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาด(ต่อม้วน) : ${item.coil}  จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                  const coilSize =
+                    item.coil === "ระบุค่าเอง" ? item.customsize : item.coil;
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาด(ต่อม้วน) : ${coilSize}  จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
                 } else if (item.name === "เหล็กตัด หนวดกุ้ง") {
-                  
+                  return `สินค้า : ${item.name} ความยาว : ${item.dowelsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กจ๊อย (โดเวล)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} ขนาดข้ออ้อย : ${item.dowelsize2} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เเหล็ก 2 หุนลาย") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} น้ำหนัก(กิโลกรัม/เส้น) : ${item.twohunsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ลวดเหล็กตะปูรีดเย็น") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "แผงรั้วสำเร็จ (รั้วไวร์เมช)") {
+                  return `สินค้า : ${item.name} ขนาดเหล็กรั้ว : ${item.Panelheight} ความกว้างแผง : ${item.Panelwidth} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ไวร์รอท (ลวดเหล็กคาร์บอนต่ำ)") {
+                  return `สินค้า : ${item.name} ขนาดลวด : ${item.wiresize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "เหล็กนั่งร้าน") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                }
+                // else if (item.name === "กล่องเกเบี้ยน") {
+                //   return `สินค้า : ${item.name} ขนาด : ${item.gabion1} ตา : ${item.gabion2} ระบุเป็นน้ำหนัก : ${item.weight} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                // }
+                else if (item.name === "กล่องเกเบี้ยน") {
+                  let sizeInfo = "";
+                  if (item.weight) {
+                    sizeInfo = `ระบุเป็นน้ำหนัก : ${item.weight}`;
+                  } else if (item.gabion1 && item.gabion2) {
+                    sizeInfo = `ขนาด : ${item.gabion1} ตา : ${item.gabion2}`;
+                  }
+                  return `สินค้า : ${item.name} ${sizeInfo} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "ลวดPC wire เบอร์#8 (4มิล)") {
+                  return `สินค้า : ${item.name} ประเภท : ${item.ProductType} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                } else if (item.name === "แบบเหล็กเสา-คานเทสำเร็จ") {
+                  if (item.ProductType === "- แบบเสามาตรฐาน (สูง3เมตร)") {
+                    return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาด : ${item.polesize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                  } else if (item.ProductType === "- แบบคานมาตรฐาน") {
+                    return `สินค้า : ${item.name} ประเภท : ${item.ProductType} ขนาด : ${item.customsize} จำนวน : ${item.Number} หน่วย : ${item.Unit} วิธีจัดส่ง : ${item.delivery}`;
+                  }
                 }
                 return null;
               })}
@@ -651,15 +709,18 @@ const Quotation = (item) => {
                 ></textarea>
               </div>
             </div>
+            <p className="text-red-500 text-sm kanit-medium ml-10 md:ml-20 mb-5">
+              * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาที หรือจนกว่าจะมีข้อความปรากฎ *
+            </p>
             <button
               onClick={handlePost}
               className="w-36 h-14 ml-36 md:ml-44 kanit-medium text-lg text-white bg-[#154360] rounded-lg font-semibold hover:bg-[#ff9800] hover:text-white duration-200"
             >
               ส่งใบคำร้อง
             </button>
-            <p className="text-red-500 text-sm kanit-medium ml-10 md:ml-20 mt-5">
-                  * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาที หรือจนกว่าจะมีข้อความปรากฎ *
-                </p>
+            {/* <p className="text-red-500 text-sm kanit-medium ml-10 md:ml-20 mt-5">
+              * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาที หรือจนกว่าจะมีข้อความปรากฎ *
+            </p> */}
           </form>
         )}
       </div>
@@ -688,6 +749,18 @@ const Quotation = (item) => {
                     customsize={item.customsize}
                     delivery={item.delivery}
                     ProductType={item.ProductType}
+                    polesize={item.polesize}
+                    twohunsize={item.twohunsize}
+                    wiremeshsize1={item.wiremeshsize1}
+                    wiremeshsize2={item.wiremeshsize2}
+                    dowelsize={item.dowelsize}
+                    dowelsize2={item.dowelsize2}
+                    sheet={item.sheet}
+                    Panelheight={item.Panelheight}
+                    Panelwidth={item.Panelwidth}
+                    gabion1={item.gabion1}
+                    gabion2={item.gabion2}
+                    weight={item.weight}
                   />
                 </div>
               ))}

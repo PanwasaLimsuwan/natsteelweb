@@ -31,7 +31,20 @@ export const orebiSlice = createSlice({
           product.nailsize === newItem.nailsize &&
           product.customsize === newItem.customsize &&
           product.Unit === newItem.Unit &&
-          product.delivery === newItem.delivery
+          product.delivery === newItem.delivery &&
+          product.polesize === newItem.polesize &&
+          product.stirrupssize === newItem.stirrupssize &&
+          product.twohunsize === newItem.twohunsize &&
+          product.wiremeshsize1 === newItem.wiremeshsize1 &&
+          product.wiremeshsize2 === newItem.wiremeshsize2 &&
+          product.dowelsize === newItem.dowelsize &&
+          product.dowelsize2 === newItem.dowelsize2 &&
+          product.sheet === newItem.sheet &&
+          product.Panelheight === newItem.Panelheight &&
+          product.Panelwidth === newItem.Panelwidth &&
+          product.gabion1 === newItem.gabion1 &&
+          product.gabion2 === newItem.gabion2 &&
+          product.weight === newItem.weight
       );
 
       if (existingProduct) {
@@ -55,7 +68,20 @@ export const orebiSlice = createSlice({
           item.nailsize === action.payload.nailsize &&
           item.customsize === action.payload.customsize &&
           item.Unit === action.payload.Unit &&
-          item.delivery === action.payload.delivery
+          item.delivery === action.payload.delivery &&
+          item.polesize === action.payload.polesize &&
+          item.stirrupssize === action.payload.stirrupssize &&
+          item.twohunsize === action.payload.twohunsize &&
+          item.wiremeshsize1 === action.payload.wiremeshsize1 &&
+          item.wiremeshsize2 === action.payload.wiremeshsize2 &&
+          item.dowelsize === action.payload.dowelsize &&
+          item.dowelsize2 === action.payload.dowelsize2 &&
+          item.sheet === action.payload.sheet &&
+          item.Panelheight === action.payload.Panelheight &&
+          item.Panelwidth === action.payload.Panelwidth &&
+          item.gabion1 === action.payload.gabion1 &&
+          item.gabion2 === action.payload.gabion2 &&
+          item.weight === action.payload.weight
       );
       if (item && item.quantity < 10000) {
         item.quantity++;
@@ -77,7 +103,20 @@ export const orebiSlice = createSlice({
           item.nailsize === action.payload.nailsize &&
           item.customsize === action.payload.customsize &&
           item.Unit === action.payload.Unit &&
-          item.delivery === action.payload.delivery
+          item.delivery === action.payload.delivery &&
+          item.polesize === action.payload.polesize &&
+          item.stirrupssize === action.payload.stirrupssize &&
+          item.twohunsize === action.payload.twohunsize &&
+          item.wiremeshsize1 === action.payload.wiremeshsize1 &&
+          item.wiremeshsize2 === action.payload.wiremeshsize2 &&
+          item.dowelsize === action.payload.dowelsize &&
+          item.dowelsize2 === action.payload.dowelsize2 &&
+          item.sheet === action.payload.sheet &&
+          item.Panelheight === action.payload.Panelheight &&
+          item.Panelwidth === action.payload.Panelwidth &&
+          item.gabion1 === action.payload.gabion1 &&
+          item.gabion2 === action.payload.gabion2 &&
+          item.weight === action.payload.weight
       );
       if (item && item.quantity > 1) {
         item.quantity--;

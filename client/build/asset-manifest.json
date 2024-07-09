@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ab6fa9c2.css",
-    "main.js": "/static/js/main.fb1b1cc1.js",
+    "main.css": "/static/css/main.0c994636.css",
+    "main.js": "/static/js/main.8385fbb3.js",
     "static/media/ลวดPC.jpg": "/static/media/ลวดPC.fa40aa27ac1bf47a8f84.jpg",
     "static/media/ตะปู.jpg": "/static/media/ตะปู.a421ea2da0c37f6b1181.jpg",
     "static/media/ลวดชุบสังกะสี(1).jpg": "/static/media/ลวดชุบสังกะสี(1).2151d184f54590c15917.jpg",
@@ -31,6 +31,7 @@
     "static/media/ปลอกสามเหลี่ยม(1).jpg": "/static/media/ปลอกสามเหลี่ยม(1).ce8e2c3089888d39d39b.jpg",
     "static/media/officeblend2.png": "/static/media/officeblend2.dbe7726f8ba86a048389.png",
     "static/media/แบบเหล็ก.jpg": "/static/media/แบบเหล็ก.5d6dc6becf18a8900637.jpg",
+    "static/media/ลวดเหล็กตะปูรีดเย็น(2).jpg": "/static/media/ลวดเหล็กตะปูรีดเย็น(2).8e76887d3a89e84d2c0f.jpg",
     "static/media/ตะแกรงไวร์เมช.jpg": "/static/media/ตะแกรงไวร์เมช.caf43b559f0f69ef9e0c.jpg",
     "static/media/เหล็กปลอกราง(1).jpg": "/static/media/เหล็กปลอกราง(1).66aad7d4fed6706cbaad.jpg",
     "static/media/logo2.png": "/static/media/logo2.2b22bdc1bd829f83666a.png",
@@ -46,6 +47,7 @@
     "static/media/เหล็กวงบ่อ.jpg": "/static/media/เหล็กวงบ่อ.e7002b69f12fa9b3c9c9.jpg",
     "static/media/industry3.jpg": "/static/media/industry3.42fb6378f09f65de2d03.jpg",
     "static/media/i2.jpg": "/static/media/i2.77486acc5596c46daa15.jpg",
+    "static/media/ลวดเหล็กตะปูรีดเย็น(1).jpg": "/static/media/ลวดเหล็กตะปูรีดเย็น(1).16d9097ce0df475aa18c.jpg",
     "static/media/ลวดผูกเหล็ก(2).png": "/static/media/ลวดผูกเหล็ก(2).689878bdff57adc8e531.png",
     "static/media/ปลอกเสาปลอกคาน(1).jpg": "/static/media/ปลอกเสาปลอกคาน(1).3e5c398de2b5fe637f4d.jpg",
     "static/media/เสาเอ็นทับหลัง(2).jpg": "/static/media/เสาเอ็นทับหลัง(2).a0e4190dbaa0e3fbac61.jpg",
@@ -70,6 +72,7 @@
     "static/media/ปลาคู่.jpg": "/static/media/ปลาคู่.01cb1b0224f12498321e.jpg",
     "static/media/ไวร์รอท2.jpg": "/static/media/ไวร์รอท2.7c976d9a4fba548d4e2d.jpg",
     "static/media/logo.jpg": "/static/media/logo.dcf33b66a5fc90fb9eee.jpg",
+    "static/media/เหล็กนั่งร้าน1.png": "/static/media/เหล็กนั่งร้าน1.4a03b9f3ef663dc33896.png",
     "static/media/ตารางไซส์ลวดชุบ.png": "/static/media/ตารางไซส์ลวดชุบ.c2949250a90c84788468.png",
     "static/media/ปลอกเสาปลอกคาน.png": "/static/media/ปลอกเสาปลอกคาน.5d7849eeb2f90288ab99.png",
     "static/media/ลวดตาข่ายทอ4.png": "/static/media/ลวดตาข่ายทอ4.5c28321cfebd5a571a94.png",
@@ -81,11 +84,11 @@
     "static/media/service.png": "/static/media/service.6078f6626645348e160e.png",
     "static/media/qrcode.png": "/static/media/qrcode.b576f6d079a3b8291a72.png",
     "index.html": "/index.html",
-    "main.ab6fa9c2.css.map": "/static/css/main.ab6fa9c2.css.map",
-    "main.fb1b1cc1.js.map": "/static/js/main.fb1b1cc1.js.map"
+    "main.0c994636.css.map": "/static/css/main.0c994636.css.map",
+    "main.8385fbb3.js.map": "/static/js/main.8385fbb3.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab6fa9c2.css",
-    "static/js/main.fb1b1cc1.js"
+    "static/css/main.0c994636.css",
+    "static/js/main.8385fbb3.js"
   ]
 }

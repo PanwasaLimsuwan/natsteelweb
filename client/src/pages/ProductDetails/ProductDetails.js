@@ -51,71 +51,70 @@ const ProductDetails = () => {
         </div>
         {/* <div className="bg-gray-100 flex justify-center items-center p-10"> */}
         {productInfo.productName === "เหล็กนั่งร้าน" && (
-          <hr className="w-full border-[3px] border-[#ff9800] shadow-2xl" />
-        )}
-        {productInfo.productName === "เหล็กนั่งร้าน" && (
-          <div className="bg-gray-100 flex justify-center items-center p-20">
-            <img
-              className="w-[400px] h-[500px] rounded-lg shadow-2xl"
-              src={เหล็กนั่งร้าน1}
-              alt={เหล็กนั่งร้าน1}
-            />
-            <div className="flex flex-col ml-20 gap-4">
-              <p className=" kanit-medium text-xl text-[#154360] text-shadow">
-                เหล็กนั่งร้าน 1 ชุด ประกอบไปด้วย
-              </p>
-              <p className=" kanit-medium ml-5 text-[#154360] text-shadow">
-                1.ขาตั้ง 1219x1700 mm. <br />
-                2.กากบาท 1829x1219x2198 mm. <br />
-                3.ฝาครอบ 1080x1829 mm. <br />
-                4.ข้อต่อ
-              </p>
-              <h1 className="text-4xl mt-10 kanit-medium text-[#154360]">
-                สนใจติดต่อ
-              </h1>
-              <p className=" kanit-medium text-[#ff9800] text-shadow">
-                line : @lida426 <br />
-                Tel : 091-426-9654 , 085-903-0698 , 081-760-3348
-              </p>
+          <>
+            <hr className="w-full border-[3px] border-[#ff9800] shadow-2xl" />
+            <div className="bg-gray-100 flex flex-col justify-center items-center p-10 md:flex-row md:p-20">
+              <img
+                className="w-full max-w-[400px] h-auto rounded-lg shadow-2xl"
+                src={เหล็กนั่งร้าน1}
+                alt={เหล็กนั่งร้าน1}
+              />
+              <div className="flex flex-col mt-10 md:mt-0 md:ml-20 gap-4">
+                <p className="kanit-medium text-xl text-[#154360] text-shadow">
+                  เหล็กนั่งร้าน 1 ชุด ประกอบไปด้วย
+                </p>
+                <p className="kanit-medium ml-5 text-[#154360] text-shadow">
+                  1.ขาตั้ง 1219x1700 mm. <br />
+                  2.กากบาท 1829x1219x2198 mm. <br />
+                  3.ฝาครอบ 1080x1829 mm. <br />
+                  4.ข้อต่อ
+                </p>
+                <h1 className="text-4xl mt-10 kanit-medium text-[#154360]">
+                  สนใจติดต่อ
+                </h1>
+                <p className="kanit-medium text-[#ff9800] text-shadow">
+                  line : @lida426 <br />
+                  Tel : 091-426-9654 , 085-903-0698 , 081-760-3348
+                </p>
+              </div>
             </div>
-          </div>
+          </>
         )}
         {productInfo.img2 && (
-          <hr className="w-full border-[3px] border-[#ff9800] shadow-2xl" />
-        )}
-        {productInfo.img2 && (
-          <div className="bg-gray-100 flex justify-center items-center p-20">
-            <img
-              className="w-[400px] h-[550px]"
-              src={productInfo.img2}
-              alt={productInfo.img2}
-            />
-            <div className="flex flex-col">
+          <>
+            <hr className="w-full border-[3px] border-[#ff9800] shadow-2xl" />
+            <div className="bg-gray-100 flex flex-col justify-center items-center p-10 md:flex-row md:p-20">
               <img
-                className="w-[300px] h-[275px] ml-16 rounded-lg shadow-2xl"
-                src={productInfo.img3}
-                alt={productInfo.img3}
+                className="w-full max-w-[400px] h-auto"
+                src={productInfo.img2}
+                alt={productInfo.img2}
               />
-              <img
-                className="w-[300px] h-[275px] ml-16 mt-5 rounded-lg shadow-2xl"
-                src={productInfo.img4}
-                alt={productInfo.img4}
-              />
+              <div className="flex flex-col mt-10 md:mt-0 md:ml-16 gap-4">
+                <img
+                  className="w-full max-w-[300px] h-auto rounded-lg shadow-2xl"
+                  src={productInfo.img3}
+                  alt={productInfo.img3}
+                />
+                <img
+                  className="w-full max-w-[300px] h-auto mt-5 rounded-lg shadow-2xl"
+                  src={productInfo.img4}
+                  alt={productInfo.img4}
+                />
+              </div>
+              <div className="flex flex-col mt-10 md:mt-0 md:ml-16 gap-4">
+                <h1 className="text-4xl kanit-medium text-[#154360]">
+                  สนใจติดต่อ
+                </h1>
+                <p className="kanit-medium text-[#ff9800] text-shadow">
+                  line : @lida426 <br />
+                  Tel : 091-426-9654 , 085-903-0698 , 081-760-3348
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col ml-16 gap-4">
-              <h1 className="text-4xl kanit-medium text-[#154360]">
-                สนใจติดต่อ
-              </h1>
-              <p className=" kanit-medium text-[#ff9800] text-shadow">
-                line : @lida426 <br />
-                Tel : 091-426-9654 , 085-903-0698 , 081-760-3348
-              </p>
-            </div>
-          </div>
+          </>
         )}
       </div>
     </div>
-    // </div>
   );
 };
 

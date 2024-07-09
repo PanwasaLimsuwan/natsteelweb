@@ -109,8 +109,12 @@ const Contact = () => {
       try {
         const response = await fetch(
           // "http://localhost:3001/Contact",
+          "https://natsteelweb-1.onrender.com/Contact",
+
+          // "http://localhost:3000/Quotation",
           // "http://natsteel.co.th/Contact",
-          "https://natsteelweb.onrender.com/Contact",
+          // "https://natsteelweb.onrender.com/Contact",
+          // "https://natsteelweb-1.onrender.com/Quotation",
           // "http://natsteel.co.th:3000/Contact",
           // "https://natsteelweb-git-test-panwasa-limsuwans-projects.vercel.app/Contact",
           {
@@ -230,15 +234,18 @@ const Contact = () => {
                 )}
               </div>
               <div className="text-center">
+              <p className="text-red-500 text-sm kanit-medium mb-5">
+                  * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาทีหรือจนกว่าจะมีข้อความปรากฎ *
+                </p>
                 <button
                   onClick={handlePost}
                   className="w-32 h-12 bg-[#154360] text-lg text-white kanit-medium tracking-wide rounded-xl hover:bg-[#ff9800]  duration-200"
                 >
                   ส่งข้อมูล
                 </button>
-                <p className="text-red-500 text-sm kanit-medium mt-5">
+                {/* <p className="text-red-500 text-sm kanit-medium mt-5">
                   * เมื่อกดส่งแล้วกรุณารอ 1 - 2 นาทีหรือจนกว่าจะมีข้อความปรากฎ *
-                </p>
+                </p> */}
               </div>
             </div>
           </form>

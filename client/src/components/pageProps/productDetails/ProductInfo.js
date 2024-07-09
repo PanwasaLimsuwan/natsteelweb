@@ -65,6 +65,10 @@ const ProductInfo = ({ productInfo }) => {
   const [delivery, setdelivery] = useState("");
   const [ProductType, setProductType] = useState("");
   const [weight, setweight] = useState("");
+  const [Panelheight, setPanelheight] = useState("");
+  const [Panelwidth, setPanelwidth] = useState("");
+  const [gabion1, setgabion1] = useState("");
+  const [gabion2, setgabion2] = useState("");
   const imageRef = useRef(null);
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -166,6 +170,22 @@ const ProductInfo = ({ productInfo }) => {
 
   const handleweight = (e) => {
     setweight(e.target.value);
+  };
+
+  const handlePanelheight = (e) => {
+    setPanelheight(e.target.value);
+  };
+
+  const handlePanelwidth = (e) => {
+    setPanelwidth(e.target.value);
+  };
+
+  const handlegabion1 = (e) => {
+    setgabion1(e.target.value);
+  };
+
+  const handlegabion2 = (e) => {
+    setgabion2(e.target.value);
   };
 
   const handlePost = () => {
@@ -281,6 +301,108 @@ const ProductInfo = ({ productInfo }) => {
     ) {
       alert("กรุณากรอกข้อมูล");
       return;
+    } else if (
+      productInfo.productName === "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
+      (!barbedsize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      (productInfo.productName === "ลวดชุบสังกะสี" ||
+        productInfo.productName === "ไวร์รอท (ลวดเหล็กคาร์บอนต่ำ)" ||
+        productInfo.productName === "ลวดเหล็กตะปูรีดเย็น") &&
+      (!wiresize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      (productInfo.productName === "เหล็กวงบ่อ" ||
+        productInfo.productName === "เหล็กวงท่อ") &&
+      (!Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      (productInfo.productName === "ตะแกรงเหล็กฉีก" ||
+        productInfo.productName === "เหล็กเพลทตัดสำเร็จ") &&
+      (!sheet || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" &&
+      (!wiresize ||
+        !gauge ||
+        !wiremeshsize1 ||
+        !wiremeshsize2 ||
+        !Number ||
+        !Unit ||
+        !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "สังกะสีแผ่นเรียบ" &&
+      (!wiresize ||
+        !coil ||
+        (coil === "ระบุขนาดเอง" && !customsize) ||
+        !Number ||
+        !Unit ||
+        !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "เหล็กตัด หนวดกุ้ง" &&
+      (!dowelsize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "เหล็กจ๊อย (โดเวล)" &&
+      (!dowelsize2 || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "เหล็ก 2 หุนลาย" &&
+      (!wiresize || !twohunsize || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "แผงรั้วสำเร็จ (รั้วไวร์เมช)" &&
+      (!Panelheight || !Panelwidth || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      (productInfo.productName === "เหล็กนั่งร้าน" ||
+        productInfo.productName === "ลวดPC wire เบอร์#8 (4มิล)") &&
+      (!Number || !Unit || !delivery)
+    ) {
+      if (!ProductType) {
+        alert("กรุณาเลือกประเภทสินค้า");
+        return;
+      }
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "แบบเหล็กเสา-คานเทสำเร็จ" &&
+      ((!polesize && ProductType === "- แบบเสามาตรฐาน (สูง3เมตร)") || (!customsize && ProductType === "- แบบคานมาตรฐาน") || !Number || !Unit || !delivery)
+    ) {
+      if (!ProductType) {
+        alert("กรุณาเลือกประเภทสินค้า");
+        return;
+      }
+      alert("กรุณากรอกข้อมูล");
+      return;
+    } else if (
+      productInfo.productName === "กล่องเกเบี้ยน" &&
+      ((!weight && (!gabion1 || !gabion2)) || !Number || !Unit || !delivery)
+    ) {
+      alert("กรุณากรอกข้อมูล");
+      return;
     }
     dispatch(
       addToCart({
@@ -305,6 +427,12 @@ const ProductInfo = ({ productInfo }) => {
         gauge,
         delivery,
         ProductType,
+        Panelheight,
+        Panelwidth,
+        gabion1,
+        gabion2,
+        weight,
+        polesize,
       })
     );
     alert("เพิ่มสินค้าสำเร็จ");
@@ -324,6 +452,7 @@ const ProductInfo = ({ productInfo }) => {
           wiresize,
           gauge,
           coil,
+          polesize,
           twohunsize,
           wiremeshsize1,
           wiremeshsize2,
@@ -421,51 +550,10 @@ const ProductInfo = ({ productInfo }) => {
                   value={productInfo.productName}
                 />
                 <div className="sm:text-[13px] md:text-[16px]">
-                  {productInfo.productName === "แบบเหล็กเสา-คานเทสำเร็จ" ? (
-                    <>
-                      {ProductType === "แบบเสามาตรฐาน (สูง3เมตร)" ? (
-                        <>
-                          <p className="kanit-medium text-[#154360]">
-                            ขนาด :
-                            <select
-                              name="text"
-                              type=""
-                              value={polesize}
-                              placeholder="เลือก"
-                              className="text-[#ff9800] w-24 md:mt-5 mb-2 md:ml-5 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                              onChange={handlepolesize}
-                            >
-                              <option value="">เลือก</option>
-                              <>
-                                <option value="150x150 mm.">150x150 mm.</option>
-                                <option value="200x200 mm.">200x200 mm.</option>
-                                <option value="250x250 mm.">250x250 mm.</option>
-                                <option value="300x300 mm.">300x300 mm.</option>
-                                <option value="400x400 mm.">400x400 mm.</option>
-                              </>
-                            </select>
-                          </p>
-                        </>
-                      ) : ProductType === "แบบคานมาตรฐาน" ? (
-                        <>
-                          <p className="kanit-medium text-[#154360]">
-                            ขนาด :
-                            <input
-                              name="customsize"
-                              value={customsize}
-                              onChange={handlecustomsize}
-                              placeholder="กว้างxยาว mm."
-                              className="text-[#ff9800] w-32 ml-6 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                            ></input>
-                          </p>
-                        </>
-                      ) : null}
-                    </>
-                  ) : null}
                   {productInfo.productName === "แผงรั้วสำเร็จ (รั้วไวร์เมช)" ? (
                     <>
                       <p className="kanit-medium text-[#154360]">
-                        ขนาดเล็กรั้ว :
+                        ขนาดเหล็กรั้ว :
                         <select
                           name="text"
                           type=""
@@ -487,10 +575,10 @@ const ProductInfo = ({ productInfo }) => {
                         <select
                           name="text"
                           type=""
-                          value={wiresize}
+                          value={Panelheight}
                           placeholder="เลือก"
                           className="text-[#ff9800] w-24 mb-2 md:ml-5 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                          onChange={handlewireSize}
+                          onChange={handlePanelheight}
                         >
                           <option value="">เลือก</option>
                           <>
@@ -505,10 +593,10 @@ const ProductInfo = ({ productInfo }) => {
                         <select
                           name="text"
                           type=""
-                          value={wiresize}
+                          value={Panelwidth}
                           placeholder="เลือก"
                           className="text-[#ff9800] w-24 mb-2 md:ml-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-                          onChange={handlewireSize}
+                          onChange={handlePanelwidth}
                         >
                           <option value="">เลือก</option>
                           <>
@@ -517,6 +605,47 @@ const ProductInfo = ({ productInfo }) => {
                           </>
                         </select>
                       </p>
+                    </>
+                  ) : null}
+                  {productInfo.productName === "แบบเหล็กเสา-คานเทสำเร็จ" ? (
+                    <>
+                      {ProductType === "- แบบเสามาตรฐาน (สูง3เมตร)" ? (
+                        <>
+                          <p className="kanit-medium text-[#154360]">
+                            ขนาด :
+                            <select
+                              name="polesize"
+                              type=""
+                              value={polesize}
+                              placeholder="เลือก"
+                              className="text-[#ff9800] w-24 md:mt-5 mb-2 md:ml-5 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                              onChange={handlepolesize}
+                            >
+                              <option value="">เลือก</option>
+                              <>
+                                <option value="150x150 mm.">150x150 mm.</option>
+                                <option value="200x200 mm.">200x200 mm.</option>
+                                <option value="250x250 mm.">250x250 mm.</option>
+                                <option value="300x300 mm.">300x300 mm.</option>
+                                <option value="400x400 mm.">400x400 mm.</option>
+                              </>
+                            </select>
+                          </p>
+                        </>
+                      ) : ProductType === "- แบบคานมาตรฐาน" ? (
+                        <>
+                          <p className="kanit-medium text-[#154360]">
+                            ขนาด :
+                            <input
+                              name="customsize"
+                              value={customsize}
+                              onChange={handlecustomsize}
+                              placeholder="กว้างxยาว mm."
+                              className="text-[#ff9800] w-32 ml-6 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                            ></input>
+                          </p>
+                        </>
+                      ) : null}
                     </>
                   ) : null}
                   {productInfo.productName === "เหล็กตัด หนวดกุ้ง" ? (
@@ -536,7 +665,8 @@ const ProductInfo = ({ productInfo }) => {
                   {productInfo.productName !== "กิ๊บลวดหนาม" &&
                   productInfo.productName !== "เหล็กวงบ่อ" &&
                   productInfo.productName !== "เหล็กวงท่อ" &&
-                  productInfo.productName !== "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
+                  productInfo.productName !==
+                    "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
                   productInfo.productName !== "แบบเหล็กเสา-คานเทสำเร็จ" &&
                   productInfo.productName !== "ลวดPC wire เบอร์#8 (4มิล)" &&
                   productInfo.productName !== "กล่องเกเบี้ยน" &&
@@ -577,19 +707,20 @@ const ProductInfo = ({ productInfo }) => {
                               </>
                             ) : null}
                           </>
-                        ) : productInfo.productName === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" ? (
+                        ) : productInfo.productName ===
+                          "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" ? (
                           <>
-                          <option value="2.60 mm.">2.60 mm.</option>
-                          <option value="2.80 mm.">2.80 mm.</option>
-                          <option value="3.00 mm.">3.00 mm.</option>
-                          <option value="3.20 mm.">3.20 mm.</option>
-                          <option value="3.40 mm.">3.40 mm.</option>
-                          <option value="3.60 mm.">3.60 mm.</option>
-                          <option value="3.80 mm.">3.80 mm.</option>
-                          <option value="4.00 mm.">4.00 mm.</option>
-                          <option value="5.00 mm.">5.00 mm.</option>
-                          <option value="6.00 mm.">6.00 mm.</option>
-                        </>
+                            <option value="2.60 mm.">2.60 mm.</option>
+                            <option value="2.80 mm.">2.80 mm.</option>
+                            <option value="3.00 mm.">3.00 mm.</option>
+                            <option value="3.20 mm.">3.20 mm.</option>
+                            <option value="3.40 mm.">3.40 mm.</option>
+                            <option value="3.60 mm.">3.60 mm.</option>
+                            <option value="3.80 mm.">3.80 mm.</option>
+                            <option value="4.00 mm.">4.00 mm.</option>
+                            <option value="5.00 mm.">5.00 mm.</option>
+                            <option value="6.00 mm.">6.00 mm.</option>
+                          </>
                         ) : productInfo.productName ===
                           "ไวร์รอท (ลวดเหล็กคาร์บอนต่ำ)" ? (
                           <>
@@ -707,7 +838,7 @@ const ProductInfo = ({ productInfo }) => {
                       </select>
                     </p>
                   ) : null}
-                                    {productInfo.productName ===
+                  {productInfo.productName ===
                   "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" ? (
                     <p className="kanit-medium text-[#154360]">
                       ขนาดตกตะแกรง :
@@ -721,7 +852,7 @@ const ProductInfo = ({ productInfo }) => {
                       >
                         <option value="">เลือก</option>
                         <>
-                        <>
+                          <>
                             <option value="10x30 cm.">10x30 cm.</option>
                             <option value="15x15 cm.">15x15 cm.</option>
                             <option value="20x20 cm.">20x20 cm.</option>
@@ -883,16 +1014,18 @@ const ProductInfo = ({ productInfo }) => {
                         name="customsize"
                         value={customsize}
                         onChange={handlecustomsize}
-                        placeholder=""
+                        placeholder="เมตร"
                         className="text-[#ff9800] w-24 md:ml-4 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                       ></input>
                     </p>
                   )}
                   {productInfo.productName !== "ตาข่ายสี่เหลี่ยม (กรงไก่)" &&
                   productInfo.productName !== "เหล็กวงบ่อ" &&
-                  productInfo.productName !== "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" &&
+                  productInfo.productName !==
+                    "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" &&
                   productInfo.productName !== "เหล็กวงท่อ" &&
-                  productInfo.productName !== "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
+                  productInfo.productName !==
+                    "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
                   productInfo.productName !== "แบบเหล็กเสา-คานเทสำเร็จ" &&
                   productInfo.productName !== "ลวดPC wire เบอร์#8 (4มิล)" &&
                   productInfo.productName !== "กล่องเกเบี้ยน" &&
@@ -1004,26 +1137,26 @@ const ProductInfo = ({ productInfo }) => {
                           <p className="kanit-medium text-[#154360]">
                             ขนาด :
                             <input
-                              name="customsize"
-                              value={customsize}
-                              onChange={handlecustomsize}
+                              name="gabion1"
+                              value={gabion1}
+                              onChange={handlegabion1}
                               placeholder="กว้างxยาวxสูง m."
-                              className="text-[#ff9800] w-28 ml-9 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                              className="text-[#ff9800] w-36 ml-5 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                             ></input>
                           </p>
                           <p className="kanit-medium text-[#154360]">
                             ตา :
                             <input
-                              name="customsize"
-                              value={customsize}
-                              onChange={handlecustomsize}
+                              name="gabion2"
+                              value={gabion2}
+                              onChange={handlegabion2}
                               placeholder="กว้างxยาว cm."
-                              className="text-[#ff9800] w-28 ml-9 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                              className="text-[#ff9800] w-36 ml-10 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                             ></input>
                           </p>
                         </>
                       )}
-                      {!customsize && (
+                      {!gabion1 && !gabion2 && (
                         <p className="kanit-medium text-[#154360]">
                           ระบุเป็นน้ำหนัก :
                           <input
@@ -1137,9 +1270,10 @@ const ProductInfo = ({ productInfo }) => {
                   ) : null}
                   {productInfo.productName !==
                     "ปลอกเสา-ปลอกคาน (วัตถุดิบ มอก.)" &&
-                    productInfo.productName !== "เหล็กวงบ่อ" &&
+                  productInfo.productName !== "เหล็กวงบ่อ" &&
                   productInfo.productName !== "เหล็กวงท่อ" &&
-                    productInfo.productName !== "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
+                  productInfo.productName !==
+                    "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" &&
                   productInfo.productName !== "สังกะสีแผ่นเรียบ" &&
                   productInfo.productName !== "แบบเหล็กเสา-คานเทสำเร็จ" &&
                   productInfo.productName !== "ลวดPC wire เบอร์#8 (4มิล)" &&
@@ -1239,37 +1373,37 @@ const ProductInfo = ({ productInfo }) => {
                       ) : null}
                     </p>
                   ) : null}
-{productInfo.productName === "สังกะสีแผ่นเรียบ" && (
-        <>
-          <p className="kanit-medium text-[#154360]">
-            ขนาด(ต่อม้วน) :
-            <select
-              name="text"
-              value={coil}
-              placeholder="เลือก"
-              className="text-[#ff9800] w-28 md:ml-5 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-              onChange={handlecoil}
-            >
-              <option value="">เลือก</option>
-              <option value="4x8 ฟุต">4x8 ฟุต</option>
-              <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
-            </select>
-          </p>
-          
-          {coil === "ระบุขนาดเอง" && (
-            <p className="kanit-medium text-[#154360]">
-              ขนาด :
-              <input
-                name="customsize"
-                value={customsize}
-                onChange={handlecustomsize}
-                placeholder="กว้างxยาว ฟุต"
-                className="text-[#ff9800] w-28 mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
-              />
-            </p>
-          )}
-        </>
-      )}
+                  {productInfo.productName === "สังกะสีแผ่นเรียบ" && (
+                    <>
+                      <p className="kanit-medium text-[#154360]">
+                        ขนาด(ต่อม้วน) :
+                        <select
+                          name="text"
+                          value={coil}
+                          placeholder="เลือก"
+                          className="text-[#ff9800] w-28 md:ml-5 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                          onChange={handlecoil}
+                        >
+                          <option value="">เลือก</option>
+                          <option value="4x8 ฟุต">4x8 ฟุต</option>
+                          <option value="ระบุขนาดเอง">ระบุขนาดเอง</option>
+                        </select>
+                      </p>
+
+                      {coil === "ระบุขนาดเอง" && (
+                        <p className="kanit-medium text-[#154360]">
+                          ขนาด : 
+                          <input
+                            name="customsize"
+                            value={customsize}
+                            onChange={handlecustomsize}
+                            placeholder="กว้างxยาว ฟุต"
+                            className="text-[#ff9800] w-28 mb-5 md:ml-6 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
+                          />
+                        </p>
+                      )}
+                    </>
+                  )}
                   {/* {productInfo.productName === "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" ? (
                         <p className="kanit-medium text-[#154360]">
                           ขนาด :
@@ -1312,7 +1446,10 @@ const ProductInfo = ({ productInfo }) => {
                       className="text-[#ff9800] w-24 md:ml-6 mb-2 md:mb-5 h-10 p-2 border-2 border-[#154360] rounded-lg shadow-sm focus:border-[#ff9800] focus:shadow-md transition duration-300 outline-none"
                     >
                       <option value="">เลือก</option>
-                      {productInfo.productName ===
+                      {productInfo.productName === "รั้วแรงดึง (ตาข่ายถักปม)" ||
+                      productInfo.productName === "ลวดตาข่ายทอ (ตาข่ายข้าวหลามตัด)" ||
+                      productInfo.productName === "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ||  
+                      productInfo.productName ===
                         "เหล็กเสาเอ็น-ทับหลังสำเร็จรูป" ||
                       productInfo.productName ===
                         "ตาข่ายสี่เหลี่ยม (กรงไก่)" ? (
@@ -1352,12 +1489,13 @@ const ProductInfo = ({ productInfo }) => {
                         </>
                       ) : productInfo.productName === "ลวดหนาม" ? (
                         <>
-                          {barbedsize !== "ระบุเป็นความยาวที่ใช้" && (
+                          {/* {barbedsize !== "ระบุเป็นความยาวที่ใช้" && (
                             <option value="ขด">ขด</option>
                           )}
                           {barbedsize === "ระบุเป็นความยาวที่ใช้" && (
                             <option value="เมตร">เมตร</option>
-                          )}
+                          )} */}
+                          <option value="ขด">ขด</option>
                         </>
                       ) : productInfo.productName ===
                           "ลวดผูกเหล็ก เบอร์#18 (1.20มิล)" ||
@@ -1381,13 +1519,13 @@ const ProductInfo = ({ productInfo }) => {
                       ) : productInfo.productName === "เหล็กเพลทตัดสำเร็จ" ? (
                         <>
                           <option value="แผ่น">แผ่น</option>
-                          <option value="กิโลกรัม/แผ่น">กิโลกรัม/แผ่น</option>
+                          <option value="กิโลกรัม">กิโลกรัม</option>
                         </>
                       ) : productInfo.productName ===
                         "ตาข่ายสานหยิก (ตาข่ายตัวหนอน)" ? (
                         <>
                           <option value="แผ่น">แผ่น</option>
-                          <option value="ตารางเมตร">ตารางเมตร</option>
+                          {/* <option value="ตารางเมตร">ตารางเมตร</option> */}
                         </>
                       ) : productInfo.productName ===
                         "ไวร์เมช (ตะแกรงเหล็กเทพื้นสำเร็จรูป)" ? (
@@ -1404,7 +1542,7 @@ const ProductInfo = ({ productInfo }) => {
                         <>
                           {twohunsize === "1.30 กิโลกรัม/เส้น" ||
                           twohunsize === "1.03 กิโลกรัม/เส้น" ? (
-                            <option value="มัด">400เส้น/มัด</option>
+                            <option value="มัด">มัด (400เส้น/มัด)</option>
                           ) : twohunsize === "0.55 กิโลกรัม/เส้น" ||
                             twohunsize === "0.35 กิโลกรัม/เส้น" ? (
                             <option value="มัด">1000เส้น/มัด</option>
@@ -1418,7 +1556,7 @@ const ProductInfo = ({ productInfo }) => {
                       ) : productInfo.productName ===
                         "ไวร์รอท (ลวดเหล็กคาร์บอนต่ำ)" ? (
                         <>
-                          <option value="ขด">ขด/2000กิโลกรัม</option>
+                          <option value="ขด">ขด (2000กิโลกรัม/ขด)</option>
                         </>
                       ) : productInfo.productName === "เหล็กนั่งร้าน" ? (
                         <>
@@ -1431,19 +1569,23 @@ const ProductInfo = ({ productInfo }) => {
                       ) : productInfo.productName ===
                         "ลวดPC wire เบอร์#8 (4มิล)" ? (
                         <>
-                          <option value="ม้วน">ม้วน/1000กิโลกรัม</option>
+                          <option value="ม้วน">ม้วน (1000กิโลกรัม/ม้วน)</option>
                         </>
-                        ) : productInfo.productName !== "เหล็กวงบ่อ" ||
-                      productInfo.productName !== "เหล็กวงท่อ" ? (
+                      ) : productInfo.productName === "แบบเหล็กเสา-คานเทสำเร็จ" ? (
                         <>
-                          <option value="ขด">30กิโลกรัม/ขด</option>
+                          <option value="ชิ้น">ชิ้น</option>
                         </>
-                      ) : (
+                      ) : productInfo.productName === "เหล็กวงบ่อ" ||
+                        productInfo.productName === "เหล็กวงท่อ" ? (
                         <>
-                          <option value="ม้วน">ม้วน</option>
-                          <option value="ตารางเมตร">ตารางเมตร</option>
+                          <option value="ขด">ขด (30กิโลกรัม/ขด)</option>
                         </>
-                      )}
+                      // ) : (
+                      //   <>
+                      //     <option value="ม้วน">ม้วน</option>
+                      //     {/* <option value="ตารางเมตร">ตารางเมตร</option> */}
+                      //   </>
+                    ) : null} 
                     </select>
                   </p>
                   <p className="kanit-medium sm:text-[13px] md:text-[15px] text-[#154360]">
